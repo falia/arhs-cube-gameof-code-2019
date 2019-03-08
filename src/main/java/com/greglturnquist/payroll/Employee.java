@@ -18,12 +18,8 @@ package com.greglturnquist.payroll;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Version;
 
 import lombok.Data;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author Greg Turnquist
@@ -38,17 +34,12 @@ public class Employee {
 	private String lastName;
 	private String description;
 
-	private @Version @JsonIgnore Long version;
-
-	private @ManyToOne Manager manager;
-
 	private Employee() {}
 
-	public Employee(String firstName, String lastName, String description, Manager manager) {
+	public Employee(String firstName, String lastName, String description) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.description = description;
-		this.manager = manager;
 	}
 }
 // end::code[]
