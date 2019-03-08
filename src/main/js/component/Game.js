@@ -54,17 +54,28 @@ class Game extends React.Component {
                     category: "C2",
                     subjet: "S3"
                 }
-            ]
+            ],
+
+            show : false
         }
+
+        this.toggleShow = this.toggleShow.bind(this);
     }
+
+    toggleShow(show) {
+        this.setState({show});
+    }
+
 
     render() {
         return (
+
             <div className="game">
                 <Player key="pc" data={this.state.player1}/>
                 <Deck data={this.state.deck}/>
                 <Player key="max" data={this.state.player1}/>
-                <Actions/>
+                <Actions show={this.state.show} handleOnClick={this.toggleShow}/>
+
             </div>
         )
     }
