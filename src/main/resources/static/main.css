@@ -54,6 +54,10 @@ td, th {
     transform: scale(1.1);
 }
 
+.board-card-frame.disabled:hover {
+    transform: none;
+}
+
 .board-card {
     box-shadow: inset 0px 0px 15px rgba(0, 0, 0, 0.75);
     padding: 10px;
@@ -62,9 +66,9 @@ td, th {
     font-weight: bold;
 }
 
-.board-card disabled {
+.board-card.disabled {
     box-shadow: inset 0px 0px 110px rgba(0, 0, 0, 0.9);
-    background-color: #959595;
+    background-color: #454545;
 }
 
 .board-card>.category {

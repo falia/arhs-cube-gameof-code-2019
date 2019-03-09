@@ -64,7 +64,7 @@ class Game extends React.Component {
                     id: 3,
                     title: "Sports",
                     icon: "/icons/icon-category-sport.png",
-                    color: "#288328",
+                    color: "#74c764",
                     subjects: [
                         {
                             id: 1,
@@ -117,7 +117,8 @@ class Game extends React.Component {
                             id: 1,
                             title: "S1",
                             thumbnail: "/thumbnails/1877-01-07_01-00001.jpg"
-                        }
+                        },
+                        status: "hidden"
                     },
                     {
                         category: {
@@ -130,7 +131,8 @@ class Game extends React.Component {
                             id: 1,
                             title: "S1",
                             thumbnail: "/thumbnails/1877-01-09_01-00001.jpg"
-                        }
+                        },
+                        status: "hidden"
                     }
                 ],
 
@@ -144,28 +146,30 @@ class Game extends React.Component {
                     {
                         category: {
                             id: 1,
-                            title: "Economy",
-                            icon: "/icons/icon-category-economy.png",
-                            color: "#e9c996"
+                            title: "Sports",
+                            icon: "/icons/icon-category-sport.png",
+                            color: "#74c764",
                         },
                         subject: {
                             id: 1,
-                            title: "S2",
-                            thumbnail: "/thumbnails/1877-01-13_01-00001.jpg"
-                        }
+                            title: "S1",
+                            thumbnail: "/thumbnails/1877-10-20_01-00001.jpg"
+                        },
+                        status: "visible"
                     },
                     {
                         category: {
                             id: 2,
                             title: "Politics",
                             icon: "/icons/icon-category-politic.png",
-                            color: "#836123"
+                            color: "#a5aee3",
                         },
                         subject: {
                             id: 1,
                             title: "S2",
                             thumbnail: "/thumbnails/1877-02-10_01-00001.jpg"
-                        }
+                        },
+                        status: "visible"
                     }
                 ],
 
@@ -177,11 +181,13 @@ class Game extends React.Component {
             deck: [
                 {
                     category: "C1",
-                    subject: "S3"
+                    subject: "S3",
+                    status: "hidden"
                 },
                 {
                     category: "C2",
-                    subject: "S3"
+                    subject: "S3",
+                    status: "hidden"
                 }
             ],
 
@@ -258,7 +264,7 @@ class Game extends React.Component {
             <div className="game">
                 <Player key="pc" data={this.state.player1}/>
                 <Deck data={this.state.deck}/>
-                <Player key="max" data={this.state.player1}/>
+                <Player key="max" data={this.state.player2}/>
                 <Actions onChosenCard={this.handleChoseCard}
                          matriceData={this.state.matriceData}
                          show={this.state.show}

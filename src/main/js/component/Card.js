@@ -2,9 +2,8 @@ import React from "react";
 
 class Card extends React.Component {
 
-    render() {
+    renderVisibleCard() {
         return (
-
             <div onClick={e => {this.props.onChosenCard({
                 category:this.props.data.category,
                 subject:this.props.data.subject
@@ -31,6 +30,19 @@ class Card extends React.Component {
 
             </div>
         )
+    }
+
+    renderHiddenCard() {
+        return (
+            <div className={'board-card-frame disabled' + (this.props.left ? ' board-card-min' : '')}>
+                <div className="board-card disabled">
+                </div>
+            </div>
+        )
+    }
+
+    render() {
+        return this.props.data.status === "hidden" ? this.renderHiddenCard() : this.renderVisibleCard();
     }
 
 }
