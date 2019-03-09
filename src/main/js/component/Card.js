@@ -2,9 +2,8 @@ import React from "react";
 
 class Card extends React.Component {
 
-    render() {
+    renderVisibleCard() {
         return (
-
             <div className={'board-card-frame' + (this.props.left ? ' board-card-min' : '')}>
                 <div className="board-card" style={{backgroundColor: this.props.data.category.color}}>
                     <div className="category">
@@ -28,6 +27,19 @@ class Card extends React.Component {
 
             </div>
         )
+    }
+
+    renderHiddenCard() {
+        return (
+            <div className={'board-card-frame disabled' + (this.props.left ? ' board-card-min' : '')}>
+                <div className="board-card disabled">
+                </div>
+            </div>
+        )
+    }
+
+    render() {
+        return this.props.data.status === "visible" ? this.renderVisibleCard() : this.renderHiddenCard();
     }
 
 }
