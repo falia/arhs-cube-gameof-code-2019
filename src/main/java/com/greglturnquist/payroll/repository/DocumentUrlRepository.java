@@ -13,29 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.greglturnquist.payroll;
+package com.greglturnquist.payroll.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
+import org.springframework.data.repository.CrudRepository;
 
 /**
  * @author Greg Turnquist
  */
 // tag::code[]
-@Component
-public class DatabaseLoader implements CommandLineRunner {
+public interface DocumentUrlRepository extends CrudRepository<DocumentUrl, Long> {
 
-	private final EmployeeRepository repository;
-
-	@Autowired
-	public DatabaseLoader(EmployeeRepository repository) {
-		this.repository = repository;
-	}
-
-	@Override
-	public void run(String... strings) throws Exception {
-		this.repository.save(new Employee("Frodo", "Baggins", "ring bearer"));
-	}
 }
 // end::code[]
