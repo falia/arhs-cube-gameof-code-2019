@@ -300,6 +300,7 @@ class Game extends React.Component {
                 {this.state.start &&
 
                 <div className="game">
+                    <div className="roof"></div>
                     <Player key="pc" data={this.state.player1}/>
 
                     <Hint message={this.state.message}/>
