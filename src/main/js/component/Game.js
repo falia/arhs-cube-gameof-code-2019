@@ -9,7 +9,7 @@ class Game extends React.Component {
         super(props);
 
         this.state = {
-            turn: 1,
+            turn: 'player1',
 
             matriceData: [
                 {
@@ -165,6 +165,7 @@ class Game extends React.Component {
         };
 
         this.toggleShow = this.toggleShow.bind(this);
+        this.handleChoseCard = this.handleChoseCard.bind(this);
     }
 
     toggleShow(show) {
@@ -172,21 +173,22 @@ class Game extends React.Component {
     }
 
     handleChoseCard(card, subject, player) {
-        if(player==='player1') {
+        alert("faton");
+/*        if (player === 'player1') {
             let cardFound = this.checkCard(card, subject, this.state.player2.cards);
 
-            if(cardFound) {
+            if (cardFound) {
                 this.addCardAndCheckGame(cardFound, this.state.player1);
             }
         }
 
-        if(player==='player2'){
+        if (player === 'player2') {
             let cardFound = this.checkCard(card, subject, this.state.player1.cards);
 
-            if(cardFound) {
+            if (cardFound) {
                 this.addCardAndCheckGame(cardFound, this.state.player2);
             }
-        }
+        }*/
     }
 
     addCardAndCheckGame(card, player) {
@@ -195,10 +197,10 @@ class Game extends React.Component {
 
     checkCard(card, subject, cards) {
         const foundCards = cards.filter(val => {
-                return card.id == val.category.id && subject.id == val.subject.id
+            return card.id == val.category.id && subject.id == val.subject.id
         });
 
-        if(foundCards && foundCards.length > 0) {
+        if (foundCards && foundCards.length > 0) {
             return foundCards[0];
         } else {
             return null;
@@ -212,12 +214,13 @@ class Game extends React.Component {
                 <Player key="pc" data={this.state.player1}/>
                 <Deck data={this.state.deck}/>
                 <Player key="max" data={this.state.player1}/>
-                <Actions matriceData={this.state.matriceData} show={this.state.show} handleOnClick={this.toggleShow}/>
-
+                <Actions onChosenCard={this.handleChoseCard}
+                         matriceData={this.state.matriceData}
+                         show={this.state.show}
+                         handleToggle={this.toggleShow}/>
             </div>
         )
     }
-
 }
 
 
