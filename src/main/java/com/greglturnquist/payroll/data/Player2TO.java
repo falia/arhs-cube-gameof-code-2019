@@ -27,4 +27,10 @@ public class Player2TO {
     public void setSummary(SummaryTO summary) {
         this.summary = summary;
     }
+
+    public void displayCards(Boolean isVisible) {
+        for (CardTO card :player2) {
+            card.setStatus(isVisible?"visible":"hidden");
+        }
+    }
 }

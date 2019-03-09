@@ -44,6 +44,10 @@ public class CardTO {
         return status;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getUrl() {
         return url;
     }

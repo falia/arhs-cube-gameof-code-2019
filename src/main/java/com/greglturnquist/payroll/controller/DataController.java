@@ -23,7 +23,7 @@ public class DataController {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    @RequestMapping(value = "/api/data", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/api/s", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public String requestData() {
 
@@ -36,7 +36,6 @@ public class DataController {
         Player2TO player2 = new Player2TO();
         DeckTO deckTO = new DeckTO();
 
-
         JsonArray jsonArray = new JsonArray();
         Gson gson = new GsonBuilder().create();
 
@@ -44,12 +43,14 @@ public class DataController {
 
         List<CardTO> player1Cards = getCards(cards, 5);
         player1.getHand().addAll(player1Cards);
+        player1.displayCards(false);
 
         List<CardTO> player2Cards = getCards(cards, 5);
         player2.getHand().addAll(player2Cards);
+        player2.displayCards(true);
 
         deckTO.getDeck().addAll(cards);
-
+        deckTO.displayCards(false);
 
         jsonArray.add(gson.toJsonTree(categoryTO));
         jsonArray.add(gson.toJsonTree(player1));

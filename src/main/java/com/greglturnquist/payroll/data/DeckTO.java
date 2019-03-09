@@ -17,4 +17,11 @@ public class DeckTO {
     public void setDeck(List<CardTO> deck) {
         this.deck = deck;
     }
+
+
+    public void displayCards(Boolean isVisible) {
+        for (CardTO card :deck) {
+            card.setStatus(isVisible?"visible":"hidden");
+        }
+    }
 }
