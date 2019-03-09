@@ -15,8 +15,7 @@
  */
 package com.greglturnquist.payroll.repository;
 
-import com.greglturnquist.payroll.data.ScienceDocuments;
-import com.greglturnquist.payroll.data.SportDocuments;
+import com.greglturnquist.payroll.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -38,6 +37,12 @@ public class DatabaseLoader implements CommandLineRunner {
     private ScienceDocuments scienceDocuments;
     @Autowired
     private SportDocuments sportDocuments;
+    @Autowired
+    private EconomyDocuments economyDocuments;
+    @Autowired
+    private CultureDocuments cultureDocuments;
+    @Autowired
+    private PoliticsDocuments politicsDocuments;
 
     @Autowired
     public DatabaseLoader(CategoryRepository repository, SubjectRepository subjectRepository) {
@@ -81,12 +86,12 @@ public class DatabaseLoader implements CommandLineRunner {
 
     private List<Subject> createCultureSubjects() {
         ArrayList<Subject> subjects = new ArrayList<>();
-        subjects.add(createSubject("Cinema"));
-        subjects.add(createSubject("Music"));
-        subjects.add(createSubject("Spectacle"));
-        subjects.add(createSubject("Literature"));
-        subjects.add(createSubject("Television"));
-        subjects.add(createSubject("Exposition"));
+        subjects.add(createSubject("Cinema").addAllDocument(cultureDocuments.createCinemaDocuments()));
+        subjects.add(createSubject("Music").addAllDocument(cultureDocuments.createMusicDocuments()));
+        subjects.add(createSubject("Spectacle").addAllDocument(cultureDocuments.createEventsDocuments()));
+        subjects.add(createSubject("Literature").addAllDocument(cultureDocuments.createLiteratureDocuments()));
+        subjects.add(createSubject("Television").addAllDocument(cultureDocuments.createTelevisionDocuments()));
+        subjects.add(createSubject("Exposition").addAllDocument(cultureDocuments.createExpositionDocuments()));
         return subjects;
     }
 
@@ -103,22 +108,22 @@ public class DatabaseLoader implements CommandLineRunner {
 
     private List<Subject> createEconomySubjects() {
         ArrayList<Subject> subjects = new ArrayList<>();
-        subjects.add(createSubject("International"));
-        subjects.add(createSubject("National"));
-        subjects.add(createSubject("Job"));
-        subjects.add(createSubject("Market"));
-        subjects.add(createSubject("Real state"));
-        subjects.add(createSubject("Macro economy"));
+        subjects.add(createSubject("International").addAllDocument(economyDocuments.createInternationalDocuments()));
+        subjects.add(createSubject("National").addAllDocument(economyDocuments.createNationalDocuments()));
+        subjects.add(createSubject("Job").addAllDocument(economyDocuments.createJobsDocuments()));
+        subjects.add(createSubject("Market").addAllDocument(economyDocuments.createMarketDocuments()));
+        subjects.add(createSubject("Real state").addAllDocument(economyDocuments.createRealStateDocuments()));
+        subjects.add(createSubject("Macro economy").addAllDocument(economyDocuments.createMacroEconomyDocuments()));
         return subjects;
     }
 
     private List<Subject> createPoliticSubjects() {
         ArrayList<Subject> subjects = new ArrayList<>();
-        subjects.add(createSubject("Social"));
-        subjects.add(createSubject("Society"));
-        subjects.add(createSubject("International"));
-        subjects.add(createSubject("Education"));
-        subjects.add(createSubject("Ecology"));
+        subjects.add(createSubject("Social").addAllDocument(politicsDocuments.createSocialDocuments()));
+        subjects.add(createSubject("Society").addAllDocument(politicsDocuments.createSocietyDocuments()));
+        subjects.add(createSubject("International").addAllDocument(politicsDocuments.createInternationalDocuments()));
+        subjects.add(createSubject("Education").addAllDocument(politicsDocuments.createEducationDocuments()));
+        subjects.add(createSubject("Ecology").addAllDocument(politicsDocuments.createEcologyDocuments()));
         return subjects;
     }
 
