@@ -5,11 +5,21 @@ class Card extends React.Component {
     render() {
         return (
             <div className="board-card">
-                <div className="category">
-                    <img className="category-icon" src={this.props.data.category.icon}></img>
-                    <h2>{this.props.data.category.title}</h2>
+                <div className="category" style={{color: this.props.data.category.color}}>
+                    <div className="category-icon">
+                        <img src={this.props.data.category.icon} width="20" height="20"></img>
+                    </div>
+                    <div className="category-title">
+                        {this.props.data.category.title}
+                    </div>
                 </div>
-                <div className="subject">{this.props.data.subject}</div>
+                <div className="subject">
+                    <div className="subject-body">
+                    </div>
+                    <div className="subject-footer">
+                        {this.props.data.subject}
+                    </div>
+                </div>
             </div>
         )
     }
