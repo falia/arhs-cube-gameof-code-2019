@@ -15,7 +15,7 @@ class Game extends React.Component {
                 {
                     title: "Economy",
                     icon: "/icons/icon-category-economy.png",
-                    color: "#836123",
+                    color: "#e9c996",
                     subjects: [
                         {
                             title: "S1",
@@ -32,7 +32,7 @@ class Game extends React.Component {
                 {
                     title: "Politics",
                     icon: "/icons/icon-category-politic.png",
-                    color: "#836123",
+                    color: "#a5aee3",
                     subjects: [
                         {
                             title: "S1",
@@ -49,7 +49,7 @@ class Game extends React.Component {
                 {
                     title: "Sports",
                     icon: "/icons/icon-category-sport.png",
-                    color: "#836123",
+                    color: "#288328",
                     subjects: [
                         {
                             title: "S1",
@@ -87,7 +87,7 @@ class Game extends React.Component {
                         category: {
                             title: "Economy",
                             icon: "/icons/icon-category-economy.png",
-                            color: "#836123"
+                            color: "#e9c996",
                         },
                         subject: {
                             title: "S1"
@@ -97,7 +97,7 @@ class Game extends React.Component {
                         category: {
                             title: "Politics",
                             icon: "/icons/icon-category-politic.png",
-                            color: "#836123"
+                            color: "#a5aee3",
                         },
                         subject: {
                             title: "S1"
@@ -116,7 +116,7 @@ class Game extends React.Component {
                         category: {
                             title: "Economy",
                             icon: "/icons/icon-category-economy.png",
-                            color: "#836123"
+                            color: "#e9c996"
                         },
                         subject: {
                             title: "S2"
