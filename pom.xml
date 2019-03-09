@@ -16,8 +16,8 @@
 
 </parent>
 
-	<artifactId>fun-history</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>lucas</artifactId>
+	<version>1.0.0</version>
 
 	<name>React.js and Spring Data REST - Basic</name>
 	<description>An SPA with ReactJS in the frontend and Spring Data REST in the backend</description>
