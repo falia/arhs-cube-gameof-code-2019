@@ -52,6 +52,7 @@ td, th {
 
 .board-card-frame:hover {
     transform: scale(1.1);
+    cursor: pointer;
 }
 
 .board-card-frame.disabled:hover {
@@ -116,7 +117,13 @@ td, th {
 /* Faton*/
 .category-icon-choice {
     float: left;
-    padding-right: 30px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.category-icon-choice:hover {
+    transform: scale(1.25);
+    cursor: pointer;
 }
 
 .board-card-min {
