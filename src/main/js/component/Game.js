@@ -283,6 +283,8 @@ class Game extends React.Component {
             <div className="game">
                 <Player key="pc" data={this.state.player1}/>
 
+                <div className="board-no-mans-land"></div>
+
                 <Player key="max" data={this.state.player2}/>
                 <Actions
                          show={this.state.show}
