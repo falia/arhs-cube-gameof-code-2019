@@ -14,7 +14,11 @@ class Game extends React.Component {
             player1: {
                 cards: [
                     {
-                        category: "C1",
+                        category: {
+                            title: "Economy",
+                            icon: "/icons/icon-category-economy.png",
+                            color: "#836123"
+                        },
                         subjet: "S1"
                     },
                     {
@@ -31,7 +35,11 @@ class Game extends React.Component {
             player2: {
                 cards: [
                     {
-                        category: "C1",
+                        category: {
+                            title: "Economy",
+                            icon: "/icons/icon-category-economy.png",
+                            color: "#836123"
+                        },
                         subjet: "S2"
                     },
                     {
