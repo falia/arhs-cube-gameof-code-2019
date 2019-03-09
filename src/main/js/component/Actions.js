@@ -31,7 +31,7 @@ class Actions extends React.Component {
     render() {
         return (
             <div>
-                <button className="btn btn-default" onClick={() => this.props.handleToggle(true)}>Ask Card</button>
+                <button className="button" onClick={() => this.props.handleToggle(true)}>Ask Card</button>
                 <Modal open={this.props.show}
                         onClose={() => this.props.handleToggle(false)}
                         center
