@@ -34,7 +34,7 @@ public class SubjectTO {
     public SubjectTO(Subject subject) {
         this.id = subject.getId();
         this.title = subject.getName();
-        this.thumbnail = thumbnailMap.get(subject.getId()%8);
+        this.thumbnail = thumbnailMap.get(subject.getId()%7);
         this.url = new ArrayList<>();
         for (DocumentUrl doc : subject.getDocuments()) {
             getUrls().add(doc.getUrl());
