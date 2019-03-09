@@ -31,6 +31,46 @@ td, th {
     height: 320px;
 }
 
+.speech-bubble {
+    display: inline-block;
+    position: relative;
+    background: #e8e8e8;
+    border-radius: 2.4em;
+    padding: 5px 60px;
+    margin-left: 60px;
+    margin-top: 10px;
+    box-shadow: 0px 0px 40px grey;
+    font-family: Calibri;
+    font-weight: bold;
+}
+
+.speech {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 300ms;
+}
+
+.speech.hidden {;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 300ms, opacity 300ms;
+}
+
+.speech-bubble:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 58px solid transparent;
+    border-bottom-color: #aeaeae;
+    border-top: 0;
+    border-right: 0;
+    margin-left: -29px;
+    margin-top: -58px;
+}
+
 .player-board {
     width: 1024px;
     height: 220px;
@@ -47,11 +87,9 @@ td, th {
 
 @keyframes slideInFromBottom {
     0% {
-        transform: translateY(5%);
-        transform: rotateY(-75deg);
+        transform: rotateY(-65deg);
     }
     100% {
-        transform: translateY(0);
         transform: rotateY(0);
     }
 }
@@ -64,7 +102,7 @@ td, th {
     box-shadow: 10px 20px 20px grey;
     margin: 5px;
     float: left;
-    animation: 0.65s cubic-bezier(0, 0, 0, 1.00) 0s 1 slideInFromBottom;
+    animation: 0.15s cubic-bezier(0, 0, 0.66, 0.42) 0s 1 slideInFromBottom;
 }
 
 .board-card-frame:hover {
