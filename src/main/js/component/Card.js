@@ -4,7 +4,7 @@ class Card extends React.Component {
 
     render() {
         return (
-            <div className="board-card">
+            <div className={'board-card' + (this.props.left ? ' board-card-min' : '')}>
                 <div className="category" style={{color: this.props.data.category.color}}>
                     <div className="category-icon">
                         <img src={this.props.data.category.icon} width="20" height="20"></img>

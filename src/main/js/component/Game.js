@@ -6,7 +6,7 @@ import Deck from './Deck';
 class Game extends React.Component {
 
     constructor(props) {
-        super();
+        super(props);
 
         this.state = {
             turn: 1,
@@ -160,6 +160,39 @@ class Game extends React.Component {
         this.setState({show});
     }
 
+    handleChoseCard(card, subject, player) {
+        if(player==='player1') {
+            let cardFound = this.checkCard(card, subject, this.state.player2.cards);
+
+            if(cardFound) {
+                this.addCardAndCheckGame(cardFound, this.state.player1);
+            }
+        }
+
+        if(player==='player2'){
+            let cardFound = this.checkCard(card, subject, this.state.player1.cards);
+
+            if(cardFound) {
+                this.addCardAndCheckGame(cardFound, this.state.player2);
+            }
+        }
+    }
+
+    addCardAndCheckGame(card, player) {
+        player.cards.push(card);
+    }
+
+    checkCard(card, subject, cards) {
+        const foundCards = cards.filter(val => {
+                return card.id == val.category.id && subject.id == val.subject.id
+        });
+
+        if(foundCards && foundCards.length > 0) {
+            return foundCards[0];
+        } else {
+            return null;
+        }
+    }
 
     render() {
         return (
