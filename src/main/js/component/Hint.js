@@ -22,7 +22,10 @@ class Hint extends React.Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if(this.state.bubbleText !== newProps.message ) {
+        console.log("text-s", this.state.bubbleText);
+        console.log("message", newProps.message);
+
+        if(newProps.message != undefined && this.state.bubbleText !== newProps.message) {
             this.displayNotice(newProps.message)
         }
 

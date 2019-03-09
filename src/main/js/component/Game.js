@@ -279,7 +279,8 @@ class Game extends React.Component {
 
         if(! (card.category.id == askedCard.category.id && card.subject.id == askedCard.subject.id)) {
             console.log("change turn");
-            data.currentPlayer=currentPlayer=='player1'?'player1':'player2';
+            data["currentPlayer"]= currentPlayer=='player1'?'player2':'player1';
+            console.log(data);
             this.setState(data);
         } else {
             console.log("continue");
@@ -292,6 +293,7 @@ class Game extends React.Component {
 
         let p1 = this.state.player1;
         let p2 = this.state.player2;
+
 
         if (this.state.currentPlayer === 'player1') {
             let cardFound = this.checkCard(card, this.state.player2.cards);
@@ -409,9 +411,16 @@ class Game extends React.Component {
 
                 <Hint message={this.state.message}/>
 
-                <div className="board-no-mans-land"></div>
+                <div className="board-no-mans-land">
+                    Your turn: {
+                    this.state.currentPlayer === 'player1' ? 'LU-CA' : "MAX"
+                }
+
+                </div>
 
                 <Player key="max" data={this.state.player2}/>
+
+                {this.state.currentPlayer == 'player2' &&
                 <Actions
                          show={this.state.show}
                          handleToggle={this.toggleShow}>
@@ -429,6 +438,7 @@ class Game extends React.Component {
                         changeCategory={this.changeCategory}></ChooseCard>}
 
                 </Actions>
+                }
             </div>
         )
     }
