@@ -19,7 +19,6 @@ const content = {
     zIndex: 2000,
     position: 'relative',
     boxShadow: '0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28)',
-
     padding: '10px 20px',
     overflow: 'auto'
 };
@@ -31,31 +30,38 @@ class Actions extends React.Component {
 
         this.state = {
             currentCategory: null,
-        }
+        };
+
+        this.handleChosenCard = this.handleChosenCard.bind(this);
     }
 
-    handleOnClick(c) {
+    handleOnClickCategory(c) {
         this.setState({
             currentCategory: c
         })
     }
 
+    handleChosenCard(card) {
+        this.props.handleToggle(false);
+        this.props.onChosenCard(card);
+    }
+
     render() {
         return (
             <div>
-                <button className="btn btn-default" onClick={() => this.props.handleOnClick(true)}>Card</button>
+                <button className="btn btn-default" onClick={() => this.props.handleToggle(true)}>Card</button>
                 <PopPop position="centerCenter"
                         open={this.props.show}
-                        onClose={() => this.props.handleOnClick(false)}
+                        onClose={() => this.props.handleToggle(false)}
                         overlayStyle={overlay}
                         contentStyle={content}>
 
-                    <div style={{clear:'right'}}>
+                    <div>
                         {this.props.matriceData.map(c => {
                             return (
                                 <span key={c.title} className="category-icon-choice">
                                 <img onClick={() => {
-                                    this.handleOnClick(c)
+                                    this.handleOnClickCategory(c)
                                 }} src={c.icon} width="20" height="20"></img>
                             </span>
                             )
@@ -67,7 +73,8 @@ class Actions extends React.Component {
                         {this.state.currentCategory && this.state.currentCategory.subjects.map(s => {
                             return (
 
-                                <Card left="left" key={this.state.currentCategory.title + "_" + s.title} data={{
+                                <Card left="left" onChosenCard={this.handleChosenCard} key={this.state.currentCategory.title + "_" + s.title} data={{
+                                    player: this.props.player,
                                     category: this.state.currentCategory,
                                     subject: s
                                 }}/>

@@ -4,7 +4,10 @@ class Card extends React.Component {
 
     renderVisibleCard() {
         return (
-            <div className={'board-card-frame' + (this.props.left ? ' board-card-min' : '')}>
+            <div onClick={e => {this.props.onChosenCard({
+                category:this.props.data.category,
+                subject:this.props.data.subject
+            })}}  className={'board-card-frame' + (this.props.left ? ' board-card-min' : '')}>
                 <div className="board-card" style={{backgroundColor: this.props.data.category.color}}>
                     <div className="category">
                         <div className="category-icon">
@@ -39,7 +42,7 @@ class Card extends React.Component {
     }
 
     render() {
-        return this.props.data.status === "visible" ? this.renderVisibleCard() : this.renderHiddenCard();
+        return this.props.data.status === "hidden" ? this.renderHiddenCard() : this.renderVisibleCard();
     }
 
 }
