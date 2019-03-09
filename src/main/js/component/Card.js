@@ -36,6 +36,7 @@ class Card extends React.Component {
         return (
             <div  onClick={e => {this.props.onChosenCard(this.props.data)}}   className={'board-card-frame disabled' + (this.props.left ? ' board-card-min' : '')}>
                 <div className="board-card disabled">
+                    <img src="images/LU-CA.png" width="20" height="20"></img>
                 </div>
             </div>
         )
