@@ -15,10 +15,7 @@
  */
 package com.greglturnquist.payroll.repository;
 
-import com.greglturnquist.payroll.data.CultureDocuments;
-import com.greglturnquist.payroll.data.EconomyDocuments;
-import com.greglturnquist.payroll.data.ScienceDocuments;
-import com.greglturnquist.payroll.data.SportDocuments;
+import com.greglturnquist.payroll.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -44,6 +41,8 @@ public class DatabaseLoader implements CommandLineRunner {
     private EconomyDocuments economyDocuments;
     @Autowired
     private CultureDocuments cultureDocuments;
+    @Autowired
+    private PoliticsDocuments politicsDocuments;
 
     @Autowired
     public DatabaseLoader(CategoryRepository repository, SubjectRepository subjectRepository) {
@@ -120,11 +119,11 @@ public class DatabaseLoader implements CommandLineRunner {
 
     private List<Subject> createPoliticSubjects() {
         ArrayList<Subject> subjects = new ArrayList<>();
-        subjects.add(createSubject("Social"));
-        subjects.add(createSubject("Society"));
-        subjects.add(createSubject("International"));
-        subjects.add(createSubject("Education"));
-        subjects.add(createSubject("Ecology"));
+        subjects.add(createSubject("Social").addAllDocument(politicsDocuments.createSocialDocuments()));
+        subjects.add(createSubject("Society").addAllDocument(politicsDocuments.createSocietyDocuments()));
+        subjects.add(createSubject("International").addAllDocument(politicsDocuments.createInternationalDocuments()));
+        subjects.add(createSubject("Education").addAllDocument(politicsDocuments.createEducationDocuments()));
+        subjects.add(createSubject("Ecology").addAllDocument(politicsDocuments.createEcologyDocuments()));
         return subjects;
     }
 
