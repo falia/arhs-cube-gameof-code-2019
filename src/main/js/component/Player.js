@@ -3,7 +3,6 @@ import Card from './Card';
 
 class Player extends React.Component {
 
-
     render() {
         return (
             <div>
@@ -18,6 +17,8 @@ class Player extends React.Component {
                 </div>
                 <div className="summary">
                     score: {this.props.data.summary.score}
+                    <br/>
+                    cards: {this.props.data.cards.length}
                 </div>
             </div>
         )

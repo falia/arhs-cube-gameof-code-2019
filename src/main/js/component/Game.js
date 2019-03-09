@@ -180,27 +180,52 @@ class Game extends React.Component {
             },
 
             deck: [
+
                 {
-                    category: "C1",
-                    subject: "S3",
+                    category: {
+                        id: 1,
+                        title: "Economy",
+                        icon: "/icons/icon-category-economy.png",
+                        color: "#e9c996",
+                    },
+                    subject: {
+                        id: 2,
+                        title: "S2",
+                        thumbnail: "/thumbnails/1877-01-13_01-00001.jpg"
+                    },
                     status: "hidden"
                 },
+
+
                 {
-                    category: "C2",
-                    subject: "S3",
+                    category: {
+                        id: 1,
+                        title: "Economy",
+                        icon: "/icons/icon-category-economy.png",
+                        color: "#e9c996",
+                    },
+                    subject: {
+                        id: 3,
+                        title: "S3",
+                        thumbnail: "/thumbnails/1877-02-03_01-00001.jpg"
+                    },
                     status: "hidden"
                 }
+
             ],
 
             show: false,
 
             pickFromDeck: false,
 
+            askedCard: null,
+
             currentCategory: null,
         };
 
         this.toggleShow = this.toggleShow.bind(this);
-        this.handleChoseCard = this.handleChoseCard.bind(this);
+        this.handleChoseCardFromDeck = this.handleChoseCardFromDeck.bind(this);
+        this.handleChoseCardFromPlayer = this.handleChoseCardFromPlayer.bind(this);
         this.changeCategory = this.changeCategory.bind(this);
     }
 
@@ -214,42 +239,137 @@ class Game extends React.Component {
         this.setState({show});
     }
 
-    handleChoseCard(card) {
+    handleChoseCardFromDeck(card) {
+
+
+        let newDeck = this.removeCard(card, this.state.deck);
+
+        let userCards = [];
+        let currentPlayer = "";
+        if (this.state.currentPlayer == 'player1') {
+            card["status"] = "hidden";
+            userCards = [].concat(this.state.player1.cards, [card]);
+            currentPlayer = 'player1'
+        } else {
+            card["status"] = "visible";
+            userCards = [].concat(this.state.player2.cards, [card]);
+            currentPlayer = 'player2'
+        }
+
+        let askedCard = this.state.askedCard;
+
+        console.log("should change turn");
+        console.log("input", card);
+        console.log("askedCard", askedCard);
+
+        let user = this.state[currentPlayer];
+
+        let data = {
+            askedCard: null,
+            pickFromDeck: false,
+            currentCategory: null,
+            deck: newDeck,
+        };
+
+        data[currentPlayer] = {
+            cards: userCards,
+            summary: user.summary
+        };
+
+        if(! (card.category.id == askedCard.category.id && card.subject.id == askedCard.subject.id)) {
+            console.log("change turn");
+            data.currentPlayer=currentPlayer=='player1'?'player1':'player2';
+            this.setState(data);
+        } else {
+            console.log("continue");
+
+            this.setState(data);
+        }
+    }
+
+    handleChoseCardFromPlayer(card) {
+
+        let p1 = this.state.player1;
+        let p2 = this.state.player2;
+
         if (this.state.currentPlayer === 'player1') {
             let cardFound = this.checkCard(card, this.state.player2.cards);
 
             if (cardFound) {
+                console.log("found card");
+
                 this.toggleShow(false);
-                this.addCardAndCheckGame(cardFound);
+
+                card["status"] = "hidden";
+                let add = [].concat(this.state.player1.cards, [card]);
+
+
+                console.log(this.state.player2.cards);
+                let remove = this.removeCard(card, this.state.player2.cards);
+                console.log(remove);
+
+                this.setState({
+                    player1:{
+                        cards:add,
+                        summary:p1.summary
+                    },
+                    player2:{
+                        cards:remove,
+                        summary:p2.summary
+                    }
+                });
             } else {
-                this.getFromDeck();
+                this.setState({
+                    askedCard: card,
+                    pickFromDeck: true
+                });
+
             }
         }
 
         if (this.state.currentPlayer === 'player2') {
+
             let cardFound = this.checkCard(card, this.state.player1.cards);
 
             if (cardFound) {
+                console.log("found card in p1");
+
                 this.toggleShow(false);
-                this.addCardAndCheckGame(cardFound);
+
+                card["status"] = "visible";
+                let add = [].concat(this.state.player2.cards, [card]);
+
+
+                console.log(this.state.player1.cards);
+                let remove = this.removeCard(card, this.state.player1.cards);
+                console.log(remove);
+
+                this.setState({
+                    player1:{
+                        cards:remove,
+                        summary:p1.summary
+                    },
+                    player2:{
+                        cards:add,
+                        summary:p2.summary
+                    }
+                });
             } else {
-                this.getFromDeck();
+                this.setState({
+                    askedCard: card,
+                    pickFromDeck: true
+                });
+
             }
         }
-    }
-
-    getFromDeck() {
-        this.setState({
-            pickFromDeck: true
-        });
     }
 
     removeCard(card, array) {
-        for( var i = array.length-1; i--;){
-            if ( array[i].category.id == card.category.id && array[i].subject.id == card.subject.id){
-                array.splice(i, 1);
-            }
-        }
+        let filtered = array.filter(i => {
+            return ( i.category.id != card.category.id || i.subject.id != card.subject.id)
+        });
+
+        return filtered;
     }
 
     addCardAndCheckGame(card) {
@@ -278,6 +398,8 @@ class Game extends React.Component {
 
 
     render() {
+
+
         return (
 
             <div className="game">
@@ -292,12 +414,12 @@ class Game extends React.Component {
 
                     {this.state.pickFromDeck && <Deck
                         cards={this.state.deck}
-                        onChosenCard={this.handleChoseCard}
+                        onChosenCard={this.handleChoseCardFromDeck}
                         handleToggle={this.toggleShow}></Deck>}
 
                     {!this.state.pickFromDeck && <ChooseCard
                         matriceData={this.state.matriceData}
-                        onChosenCard={this.handleChoseCard}
+                        onChosenCard={this.handleChoseCardFromPlayer}
                         handleToggle={this.toggleShow}
                         currentCategory={this.state.currentCategory}
                         changeCategory={this.changeCategory}></ChooseCard>}

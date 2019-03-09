@@ -7,27 +7,32 @@ class Deck extends React.Component {
         super(props);
 
         this.state = {
-            currentCard: null
+            currentCard: null,
+        };
+
+        this.handleDeckClick = this.handleDeckClick.bind(this);
+    }
+
+    handleDeckClick(card) {
+        if(!this.state.currentCard) {
+            card["status"] = "visible";
+
+            this.setState({
+                currentCard: card
+            })
+        } else {
+            this.props.onChosenCard(card);
         }
     }
 
-    setCard(showCard) {
-        this.setState({
-            showCard: showCard
-        })
-    }
-
     render() {
-
-        let card = this.props.cards[this.props.cards.length - 1];
-
         return (
             <div>
-                Choose From Deck
-
+                <h5>Choose From Deck</h5>
+                <hr/>
                 <Card
-                    onChosenCard={this.props.onChosenCard}
-                    data={card}/>
+                    onChosenCard={this.handleDeckClick}
+                    data={this.props.cards[this.props.cards.length-1]}/>
 
             </div>
         )
