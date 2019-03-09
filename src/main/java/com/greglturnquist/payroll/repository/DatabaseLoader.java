@@ -15,6 +15,8 @@
  */
 package com.greglturnquist.payroll.repository;
 
+import com.greglturnquist.payroll.data.ScienceDocuments;
+import com.greglturnquist.payroll.data.SportDocuments;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -31,13 +33,16 @@ public class DatabaseLoader implements CommandLineRunner {
 
     private final CategoryRepository categoryRepository;
     private final SubjectRepository subjectRepository;
-    private final DocumentUrlRepository documentUrlRepository;
 
     @Autowired
-    public DatabaseLoader(CategoryRepository repository, SubjectRepository subjectRepository, DocumentUrlRepository documentUrlRepository) {
+    private ScienceDocuments scienceDocuments;
+    @Autowired
+    private SportDocuments sportDocuments;
+
+    @Autowired
+    public DatabaseLoader(CategoryRepository repository, SubjectRepository subjectRepository) {
         this.categoryRepository = repository;
         this.subjectRepository = subjectRepository;
-        this.documentUrlRepository = documentUrlRepository;
     }
 
     @Override
@@ -67,25 +72,11 @@ public class DatabaseLoader implements CommandLineRunner {
 
     private List<Subject> createScienceSubjects() {
         ArrayList<Subject> subjects = new ArrayList<>();
-        subjects.add(createSubject("Astronomy").addAllDocument(createAstronomyDocuments()));
-        subjects.add(createSubject("Biology").addAllDocument(createBiologyDocuments()));
-        subjects.add(createSubject("Informatics"));
-        subjects.add(createSubject("Health"));
+        subjects.add(createSubject("Astronomy").addAllDocument(scienceDocuments.createAstronomyDocuments()));
+        subjects.add(createSubject("Biology").addAllDocument(scienceDocuments.createBiologyDocuments()));
+        subjects.add(createSubject("Informatics").addAllDocument(scienceDocuments.createInformaticsDocuments()));
+        subjects.add(createSubject("Health").addAllDocument(scienceDocuments.createHealthDocuments()));
         return subjects;
-    }
-
-    private List<DocumentUrl> createAstronomyDocuments() {
-        List<DocumentUrl> documents = new ArrayList<>();
-        documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=3223808&custom_att_2=direct")));
-        documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=1128690&custom_att_2=direct")));
-        return documents;
-    }
-
-    private List<DocumentUrl> createBiologyDocuments() {
-        List<DocumentUrl> documents = new ArrayList<>();
-        documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=1908423&custom_att_2=direct")));
-        documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=1908581&custom_att_2=direct")));
-        return documents;
     }
 
     private List<Subject> createCultureSubjects() {
@@ -101,12 +92,12 @@ public class DatabaseLoader implements CommandLineRunner {
 
     private List<Subject> createSportSubjects() {
         ArrayList<Subject> subjects = new ArrayList<>();
-        subjects.add(createSubject("Football"));
-        subjects.add(createSubject("Basketball"));
-        subjects.add(createSubject("Tennis"));
-        subjects.add(createSubject("Cycling"));
-        subjects.add(createSubject("Handball"));
-        subjects.add(createSubject("Rally"));
+        subjects.add(createSubject("Football").addAllDocument(sportDocuments.createFootDocuments()));
+        subjects.add(createSubject("Basketball").addAllDocument(sportDocuments.createBaseballDocuments()));
+        subjects.add(createSubject("Tennis").addAllDocument(sportDocuments.createTennisDocuments()));
+        subjects.add(createSubject("Cycling").addAllDocument(sportDocuments.createCyclingDocuments()));
+        subjects.add(createSubject("Handball").addAllDocument(sportDocuments.createHandballDocuments()));
+        subjects.add(createSubject("Rally").addAllDocument(sportDocuments.createRallyDocuments()));
         return subjects;
     }
 
