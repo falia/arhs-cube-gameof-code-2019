@@ -9,23 +9,27 @@ class Game extends React.Component {
         super(props);
 
         this.state = {
-            turn: 'player1',
+            currentPlayer: 'player1',
 
             matriceData: [
                 {
+                    id: 1,
                     title: "Economy",
                     icon: "/icons/icon-category-economy.png",
                     color: "#e9c996",
                     subjects: [
                         {
+                            id: 1,
                             title: "S1",
                             thumbnail: "/thumbnails/1877-01-07_01-00001.jpg"
                         },
                         {
+                            id: 2,
                             title: "S2",
                             thumbnail: "/thumbnails/1877-01-13_01-00001.jpg"
                         },
                         {
+                            id: 3,
                             title: "S3",
                             thumbnail: "/thumbnails/1877-02-03_01-00001.jpg"
                         }
@@ -33,19 +37,23 @@ class Game extends React.Component {
                 },
 
                 {
+                    id: 2,
                     title: "Politics",
                     icon: "/icons/icon-category-politic.png",
                     color: "#a5aee3",
                     subjects: [
                         {
+                            id: 1,
                             title: "S1",
                             thumbnail: "/thumbnails/1877-01-09_01-00001.jpg"
                         },
                         {
+                            id: 2,
                             title: "S2",
                             thumbnail: "/thumbnails/1877-02-10_01-00001.jpg"
                         },
                         {
+                            id: 3,
                             title: "S3",
                             thumbnail: "/thumbnails/1877-09-30_01-00001.jpg"
                         }
@@ -53,35 +61,43 @@ class Game extends React.Component {
                 },
 
                 {
+                    id: 3,
                     title: "Sports",
                     icon: "/icons/icon-category-sport.png",
                     color: "#288328",
                     subjects: [
                         {
+                            id: 1,
                             title: "S1",
                             thumbnail: "/thumbnails/1877-10-20_01-00001.jpg"
                         },
                         {
+                            id: 2,
                             title: "S2",
                         },
                         {
+                            id: 3,
                             title: "S3",
                         }
                     ]
                 },
 
                 {
+                    id: 4,
                     title: "Technology",
                     icon: "/icons/icon-category-technology.png",
                     color: "#836123",
                     subjects: [
                         {
+                            id: 1,
                             title: "S1",
                         },
                         {
+                            id: 2,
                             title: "S2",
                         },
                         {
+                            id: 3,
                             title: "S3",
                         }
                     ]
@@ -92,22 +108,26 @@ class Game extends React.Component {
                 cards: [
                     {
                         category: {
+                            id: 1,
                             title: "Economy",
                             icon: "/icons/icon-category-economy.png",
                             color: "#e9c996",
                         },
                         subject: {
+                            id: 1,
                             title: "S1",
                             thumbnail: "/thumbnails/1877-01-07_01-00001.jpg"
                         }
                     },
                     {
                         category: {
+                            id: 2,
                             title: "Politics",
                             icon: "/icons/icon-category-politic.png",
                             color: "#a5aee3",
                         },
                         subject: {
+                            id: 1,
                             title: "S1",
                             thumbnail: "/thumbnails/1877-01-09_01-00001.jpg"
                         }
@@ -123,22 +143,26 @@ class Game extends React.Component {
                 cards: [
                     {
                         category: {
+                            id: 1,
                             title: "Economy",
                             icon: "/icons/icon-category-economy.png",
                             color: "#e9c996"
                         },
                         subject: {
+                            id: 1,
                             title: "S2",
                             thumbnail: "/thumbnails/1877-01-13_01-00001.jpg"
                         }
                     },
                     {
                         category: {
+                            id: 2,
                             title: "Politics",
                             icon: "/icons/icon-category-politic.png",
                             color: "#836123"
                         },
                         subject: {
+                            id: 1,
                             title: "S2",
                             thumbnail: "/thumbnails/1877-02-10_01-00001.jpg"
                         }
@@ -172,32 +196,53 @@ class Game extends React.Component {
         this.setState({show});
     }
 
-    handleChoseCard(card, subject, player) {
-        alert("faton");
-/*        if (player === 'player1') {
-            let cardFound = this.checkCard(card, subject, this.state.player2.cards);
+    handleChoseCard(card) {
+        if (this.state.currentPlayer === 'player1') {
+            let cardFound = this.checkCard(card, this.state.player2.cards);
 
             if (cardFound) {
-                this.addCardAndCheckGame(cardFound, this.state.player1);
+                this.addCardAndCheckGame(cardFound);
+            } else {
+                this.getFromDeck();
             }
         }
 
-        if (player === 'player2') {
-            let cardFound = this.checkCard(card, subject, this.state.player1.cards);
+        if (this.state.currentPlayer === 'player2') {
+            let cardFound = this.checkCard(card, this.state.player1.cards);
 
             if (cardFound) {
-                this.addCardAndCheckGame(cardFound, this.state.player2);
+                this.addCardAndCheckGame(cardFound);
+            } else {
+                this.getFromDeck();
             }
-        }*/
+        }
     }
 
-    addCardAndCheckGame(card, player) {
-        player.cards.push(card);
+    getFromDeck() {
+        alert("getFromDeck");
     }
 
-    checkCard(card, subject, cards) {
+    removeCard(card, array) {
+        for( var i = array.length-1; i--;){
+            if ( array[i].category.id == card.category.id && array[i].subject.id == card.subject.id){
+                array.splice(i, 1);
+            }
+        }
+    }
+
+    addCardAndCheckGame(card) {
+        if (this.state.currentPlayer === 'player1') {
+            this.state.player1.cards.push(card);
+            this.removeCard(card, this.state.player2);
+        } else {
+            this.state.player2.cards.push(card);
+            this.removeCard(card, this.state.player1);
+        }
+    }
+
+    checkCard(card, cards) {
         const foundCards = cards.filter(val => {
-            return card.id == val.category.id && subject.id == val.subject.id
+            return card.category.id == val.category.id && card.subject.id == val.subject.id
         });
 
         if (foundCards && foundCards.length > 0) {
