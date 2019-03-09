@@ -215,7 +215,7 @@ td, th {
 }
 
 .popup-overlay {
-    width: 1072px;
+    min-width: 1072px;
     background: unset;
 }
 
