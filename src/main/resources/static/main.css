@@ -26,15 +26,26 @@ td, th {
     background-color: rebeccapurple;
 }
 
-.board-card {
+.board-card-frame {
     width: 120px;
     height: 200px;
-    border: solid #a92731 4px;
+    border: solid #6d4b41 2px;
     border-radius: 5px;
-    background-color: #ffffff;
     box-shadow: 10px 20px 20px grey;
-    padding: 10px;
     margin: 20px;
+}
+
+.board-card {
+    box-shadow: inset 0px 0px 15px rgba(0, 0, 0, 0.75);
+    padding: 10px;
+    height: 180px;
+    font-family: Calibri;
+    font-weight: bold;
+}
+
+.board-card disabled {
+    box-shadow: inset 0px 0px 110px rgba(0, 0, 0, 0.9);
+    background-color: #959595;
 }
 
 .board-card>.category {
@@ -55,7 +66,9 @@ td, th {
 }
 
 .subject>.subject-body {
+    margin-top: 10px;
 }
+
 .subject>.subject-footer {
     height: 20px;
     text-align: center;
@@ -70,5 +83,5 @@ td, th {
 
 .board-card-min {
     float: left;
-    height: 75px;
 }
+
