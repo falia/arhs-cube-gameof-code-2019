@@ -197,11 +197,15 @@ class Game extends React.Component {
             pickFromDeck: false,
 
             currentCategory: null,
+
+            bubbleText: "",
+            showBubble: false
         };
 
         this.toggleShow = this.toggleShow.bind(this);
         this.handleChoseCard = this.handleChoseCard.bind(this);
         this.changeCategory = this.changeCategory.bind(this);
+        this.displayNotice = this.displayNotice.bind(this);
     }
 
     changeCategory(c) {
@@ -214,6 +218,13 @@ class Game extends React.Component {
         this.setState({show});
     }
 
+    displayNotice(message) {
+        this.setState({bubbleText: message, showBubble: true});
+        setTimeout(function() {
+            this.setState({showBubble: false})
+        }.bind(this), 3000)
+    }
+
     handleChoseCard(card) {
         if (this.state.currentPlayer === 'player1') {
             let cardFound = this.checkCard(card, this.state.player2.cards);
@@ -222,6 +233,7 @@ class Game extends React.Component {
                 this.toggleShow(false);
                 this.addCardAndCheckGame(cardFound);
             } else {
+
                 this.getFromDeck();
             }
         }
@@ -233,6 +245,7 @@ class Game extends React.Component {
                 this.toggleShow(false);
                 this.addCardAndCheckGame(cardFound);
             } else {
+                this.displayNotice("I don't have this card.");
                 this.getFromDeck();
             }
         }
@@ -282,7 +295,11 @@ class Game extends React.Component {
 
             <div className="game">
                 <Player key="pc" data={this.state.player1}/>
-
+                <div className={this.state.showBubble ? "speech" : "speech hidden"}>
+                    <div className="speech-bubble">
+                        <h2>{this.state.bubbleText}</h2>
+                    </div>
+                </div>
                 <div className="board-no-mans-land"></div>
 
                 <Player key="max" data={this.state.player2}/>
@@ -291,6 +308,7 @@ class Game extends React.Component {
                          handleToggle={this.toggleShow}>
 
                     {this.state.pickFromDeck && <Deck
+                        displayNotice={this.displayNotice}
                         cards={this.state.deck}
                         onChosenCard={this.handleChoseCard}
                         handleToggle={this.toggleShow}></Deck>}
