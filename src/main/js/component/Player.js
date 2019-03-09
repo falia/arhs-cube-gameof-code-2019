@@ -10,7 +10,7 @@ class Player extends React.Component {
                 <div className="cards">
                     {this.props.data.cards.map(c => {
                         return (
-                            <Card key={c.category + "_" + c.subject} data={c}/>
+                            <Card key={c.category.title + "_" + c.subject.title} data={c}/>
                         )
                     })}
                 </div>

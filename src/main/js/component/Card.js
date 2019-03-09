@@ -9,7 +9,7 @@ class Card extends React.Component {
                     <img className="category-icon" src={this.props.data.category.icon}></img>
                     <h2>{this.props.data.category.title}</h2>
                 </div>
-                <div className="subject">{this.props.data.subject}</div>
+                <div className="subject">{this.props.data.subject.title}</div>
             </div>
         )
     }

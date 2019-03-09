@@ -11,6 +11,76 @@ class Game extends React.Component {
         this.state = {
             turn: 1,
 
+            matriceData: [
+                {
+                    title: "Economy",
+                    icon: "/icons/icon-category-economy.png",
+                    color: "#836123",
+                    subjects: [
+                        {
+                            title: "S1",
+                        },
+                        {
+                            title: "S2",
+                        },
+                        {
+                            title: "S3",
+                        }
+                    ]
+                },
+
+                {
+                    title: "Politics",
+                    icon: "/icons/icon-category-politic.png",
+                    color: "#836123",
+                    subjects: [
+                        {
+                            title: "S1",
+                        },
+                        {
+                            title: "S2",
+                        },
+                        {
+                            title: "S3",
+                        }
+                    ]
+                },
+
+                {
+                    title: "Sports",
+                    icon: "/icons/icon-category-sport.png",
+                    color: "#836123",
+                    subjects: [
+                        {
+                            title: "S1",
+                        },
+                        {
+                            title: "S2",
+                        },
+                        {
+                            title: "S3",
+                        }
+                    ]
+                },
+
+                {
+                    title: "Technology",
+                    icon: "/icons/icon-category-technology.png",
+                    color: "#836123",
+                    subjects: [
+                        {
+                            title: "S1",
+                        },
+                        {
+                            title: "S2",
+                        },
+                        {
+                            title: "S3",
+                        }
+                    ]
+                },
+            ],
+
             player1: {
                 cards: [
                     {
@@ -19,11 +89,19 @@ class Game extends React.Component {
                             icon: "/icons/icon-category-economy.png",
                             color: "#836123"
                         },
-                        subjet: "S1"
+                        subject: {
+                            title: "S1"
+                        }
                     },
                     {
-                        category: "C2",
-                        subjet: "S1"
+                        category: {
+                            title: "Politics",
+                            icon: "/icons/icon-category-politic.png",
+                            color: "#836123"
+                        },
+                        subject: {
+                            title: "S1"
+                        }
                     }
                 ],
 
@@ -40,11 +118,19 @@ class Game extends React.Component {
                             icon: "/icons/icon-category-economy.png",
                             color: "#836123"
                         },
-                        subjet: "S2"
+                        subject: {
+                            title: "S2"
+                        }
                     },
                     {
-                        category: "C2",
-                        subjet: "S2"
+                        category: {
+                            title: "Politics",
+                            icon: "/icons/icon-category-politic.png",
+                            color: "#836123"
+                        },
+                        subject: {
+                            title: "S2"
+                        }
                     }
                 ],
 
@@ -56,16 +142,16 @@ class Game extends React.Component {
             deck: [
                 {
                     category: "C1",
-                    subjet: "S3"
+                    subject: "S3"
                 },
                 {
                     category: "C2",
-                    subjet: "S3"
+                    subject: "S3"
                 }
             ],
 
-            show : false
-        }
+            show: false
+        };
 
         this.toggleShow = this.toggleShow.bind(this);
     }
@@ -82,7 +168,7 @@ class Game extends React.Component {
                 <Player key="pc" data={this.state.player1}/>
                 <Deck data={this.state.deck}/>
                 <Player key="max" data={this.state.player1}/>
-                <Actions show={this.state.show} handleOnClick={this.toggleShow}/>
+                <Actions matriceData={this.state.matriceData} show={this.state.show} handleOnClick={this.toggleShow}/>
 
             </div>
         )
