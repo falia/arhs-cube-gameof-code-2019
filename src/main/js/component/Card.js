@@ -42,6 +42,29 @@ class Card extends React.Component {
         )
     }
 
+    static renderGenericHiddenCard() {
+        return (
+            <div className="deck-stack">
+                <div className={'board-card-frame disabled fake stack-1'}>
+                    <div className="board-card disabled">
+                    </div>
+                </div>
+                <div className={'board-card-frame disabled fake stack-2'}>
+                    <div className="board-card disabled">
+                    </div>
+                </div>
+                <div className={'board-card-frame disabled fake stack-3'}>
+                    <div className="board-card disabled">
+                    </div>
+                </div>
+                <div className={'board-card-frame disabled fake stack-4'}>
+                    <div className="board-card disabled">
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     render() {
         return this.props.data.status === "hidden" ? this.renderHiddenCard() : this.renderVisibleCard();
     }

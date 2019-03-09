@@ -30,9 +30,16 @@ class Deck extends React.Component {
             <div>
                 <h5>Choose From Deck</h5>
                 <hr/>
-                <Card
-                    onChosenCard={this.handleDeckClick}
-                    data={this.props.cards[this.props.cards.length-1]}/>
+                {Card.renderGenericHiddenCard()}
+                <div style={{
+                    boxShadow: 'none',
+                    float: 'none',
+                    position: 'absolute'
+                }}>
+                    <Card
+                        onChosenCard={this.handleDeckClick}
+                        data={this.props.cards[this.props.cards.length-1]}/>
+                </div>
 
             </div>
         )

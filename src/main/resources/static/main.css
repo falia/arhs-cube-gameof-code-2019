@@ -204,6 +204,33 @@ td, th {
     box-shadow: 0 0 15px rgba(0,0,0,.14), 0 4px 20px rgba(0,0,0,.28);
 }
 
+.deck-stack {
+    padding-top: 40px;
+}
+.deck-stack>.board-card-frame.disabled.fake {
+    box-shadow: none;
+}
+.deck-stack>.board-card-frame.disabled.fake.stack-1 {
+    transform: rotateZ(-2deg) translateY(-16px);
+    box-shadow: 10px 20px 20px grey;
+}
+.deck-stack>.board-card-frame.disabled.fake.stack-2 {
+    float: none;
+    position: absolute;
+    transform: rotateZ(-4deg) translateY(-12px);
+}
+.deck-stack>.board-card-frame.disabled.fake.stack-3 {
+    float: none;
+    position: absolute;
+    transform: rotateZ(-6deg) translateY(-8px);
+}
+.deck-stack>.board-card-frame.disabled.fake.stack-4 {
+    float: none;
+    position: absolute;
+    transform: rotateZ(-8deg) translateY(-4px);
+}
+
+
 
 /* Faton*/
 .category-icon-choice {
