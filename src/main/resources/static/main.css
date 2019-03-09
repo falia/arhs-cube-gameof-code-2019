@@ -26,6 +26,11 @@ td, th {
     background-color: rebeccapurple;
 }
 
+.board-no-mans-land {
+    width: 1064px;
+    height: 320px;
+}
+
 .player-board {
     width: 1024px;
     height: 220px;
@@ -69,6 +74,7 @@ td, th {
 
 .board-card-frame.disabled:hover {
     transform: none;
+    cursor: default;
 }
 
 .board-card {
