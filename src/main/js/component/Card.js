@@ -4,7 +4,8 @@ class Card extends React.Component {
 
     render() {
         return (
-            <div className="board-card-frame">
+
+            <div className={'board-card-frame' + (this.props.left ? ' board-card-min' : '')}>
                 <div className="board-card" style={{backgroundColor: this.props.data.category.color}}>
                     <div className="category">
                         <div className="category-icon">
@@ -13,6 +14,7 @@ class Card extends React.Component {
                         <div className="category-title">
                             {this.props.data.category.title}
                         </div>
+
                     </div>
                     <div className="subject">
                         <div className="subject-body">

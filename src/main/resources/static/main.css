@@ -92,3 +92,15 @@ td, th {
     height: 20px;
     text-align: center;
 }
+
+
+/* Faton*/
+.category-icon-choice {
+    float: left;
+    padding-right: 30px;
+}
+
+.board-card-min {
+    float: left;
+}
+
