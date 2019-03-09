@@ -70,7 +70,8 @@ class Game extends React.Component {
 
             askedCard: null,
 
-    
+            player1_state: {},
+            player2_state: {},
         };
 
         this.toggleShow = this.toggleShow.bind(this);
@@ -99,7 +100,6 @@ class Game extends React.Component {
         userCards = [].concat(this.state.player2.cards, [card]);
         currentPlayer = 'player2'
 
-
         let askedCard = this.state.askedCard;
 
         console.log("should change turn");
@@ -125,10 +125,10 @@ class Game extends React.Component {
             console.log("change turn");
             data["currentPlayer"] = 'player1';
             console.log(data);
-            this.setState(data, this.checkWhoOne.bind(this) && this.lucaPlayWithTimeOut.bind(this));
+            this.setState(data, this.checkWhoOne.bind(this, 'player2') && this.lucaPlayWithTimeOut.bind(this));
         } else {
             console.log("continue");
-            this.setState(data, this.checkWhoOne.bind(this));
+            this.setState(data, this.checkWhoOne.bind(this, 'player2'));
         }
     }
 
@@ -160,13 +160,13 @@ class Game extends React.Component {
                     cards: add,
                     summary: p2.summary
                 }
-            }, this.checkWhoOne.bind(this));
+            }, this.checkWhoOne.bind(this,  'player2'));
         } else {
             this.setState({
                 askedCard: card,
                 pickFromDeck: true,
                 message: "I don't have this card"
-            }, this.checkWhoOne.bind(this));
+            }, this.checkWhoOne.bind(this,  'player2'));
         }
 
     }
@@ -221,13 +221,13 @@ class Game extends React.Component {
 
         let card = this.randomCard();
 
-        let cardFound = this.checkCard(card, this.state.player1.cards);
+        let cardFound = this.checkCard(card, p2.cards);
 
         if (cardFound) {
             let add = [].concat(this.state.player1.cards, [cardFound]);
 
-            console.log("my cards", this.state.player2.cards);
-            let remove = this.removeCard(cardFound, this.state.player2.cards);
+            console.log("my cards", p2.cards);
+            let remove = this.removeCard(cardFound, p2.cards);
             console.log("my cards", remove);
             msg = msg + " Great You have card.";
 
@@ -241,7 +241,7 @@ class Game extends React.Component {
                     cards: remove,
                     summary: p2.summary
                 }
-            }, this.checkWhoOne.bind(this) && this.lucaPlayWithTimeOut);
+            }, this.checkWhoOne.bind(this, 'player1') && this.lucaPlayWithTimeOut);
         } else {
 
                 msg = msg + " You do not have the card I asked, so I picked one from the deck.";
@@ -250,7 +250,7 @@ class Game extends React.Component {
 
 
                 let newDeck = this.removeCard(deckCard, this.state.deck);
-                let lucaCards = [].concat(this.state.player1.cards, [deckCard]);
+                let lucaCards = [].concat(p1.cards, [deckCard]);
 
                 let data = {
                     askedCard: null,
@@ -270,22 +270,56 @@ class Game extends React.Component {
                     data["currentPlayer"] = "player2";
                     console.log(data);
                     data["message"] = msg;
-                    this.setState(data, this.checkWhoOne.bind(this));
+                    this.setState(data, this.checkWhoOne.bind(this, 'player1'));
                 } else {
                     console.log("continue");
                     msg = msg + " The card from the deck is the one I asked !!";
                     data["message"] = msg;
-                    this.setState(data, this.checkWhoOne.bind(this) && this.lucaPlayWithTimeOut);
+                    this.setState(data, this.checkWhoOne.bind(this, 'player1') && this.lucaPlayWithTimeOut);
                 }
 
         }
     }
 
-    checkWhoOne() {
-        if (this.state.deck.length === 0) {
+    checkWhoOne(userRef) {
+        let deck = this.state.deck;
+        let vThis = this;
+        let cards = this.state[userRef].cards;
+        if (deck.length === 0) {
             alert("End.")
         } else {
+            const reduced = cards.reduce(function(m, d){
+                if(!m[d.category.id]){
+                    m[d.category.id] = {count:1};
+                    return m;
+                }
+                m[d.category.id].count += 1;
+                return m;
+            },{});
 
+
+            let score=0;
+
+            for (let k in reduced) {
+                if (reduced.hasOwnProperty(k)) {
+
+                    if(reduced[k].count===5) score+=1;
+
+                }
+            }
+
+            let data = {};
+            data[userRef] = {
+                cards:cards,
+                summary:{
+                    score: score
+                },
+            };
+
+            vThis.setState(data);
+
+
+            console.log(reduced);
         }
     }
 
