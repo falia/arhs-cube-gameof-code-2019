@@ -15,14 +15,16 @@ public class CategoryTO {
 
     static {
         iconMap.put("Economy", "/icons/icon-category-economy.png");
-        iconMap.put("Politics", "/icons/icon-category-politic.png");
+        iconMap.put("Politic", "/icons/icon-category-politic.png");
         iconMap.put("Sport", "/icons/icon-category-sport.png");
-        iconMap.put("Technology", "/icons/icon-category-technology.png");
+        iconMap.put("Science", "/icons/icon-category-technology.png");
+        iconMap.put("Culture", "/icons/icon-category-music.png");
 
         colorMap.put("Economy", "#e9c996");
-        colorMap.put("Politics", "#a5aee3");
+        colorMap.put("Politic", "#a5aee3");
         colorMap.put("Sport", "#74c764");
-        colorMap.put("Technology", "#836123");
+        colorMap.put("Science", "#836123");
+        iconMap.put("Culture", "#836537");
     }
 
     private Long id;

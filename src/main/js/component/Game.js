@@ -448,15 +448,13 @@ class Game extends React.Component {
                 }
             }, this.checkWhoOne.bind(this) && this.lucaPlayWithTimeOut);
         } else {
-            if (this.state.deck.length === 0) {
-                this.checkWhoOne();
-            } else {
+
                 msg = msg + " You do not have the card I asked, so I picked one from the deck.";
 
                 let deckCard = this.state.deck[this.state.deck.length - 1];
 
 
-                let newDeck = this.removeCard(card, this.state.deck);
+                let newDeck = this.removeCard(deckCard, this.state.deck);
                 let lucaCards = [].concat(this.state.player1.cards, [deckCard]);
 
                 let data = {
@@ -484,7 +482,7 @@ class Game extends React.Component {
                     data["message"] = msg;
                     this.setState(data, this.checkWhoOne.bind(this) && this.lucaPlayWithTimeOut);
                 }
-            }
+
         }
     }
 
