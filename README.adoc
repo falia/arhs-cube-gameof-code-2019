@@ -1,6 +1,6 @@
 # Luca
 
-This project provides a new vizulation way of historical news papers via an interactive & educative game.
+This project provides an innovative way to interact with historical data using the support of newspapers digitalised at BnL via an interactive & educative card game.
 
 - Classification / grouping
 - New papers analysis
