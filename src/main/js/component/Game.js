@@ -3,6 +3,7 @@ import Player from './Player';
 import Actions from './Actions';
 import Deck from './Deck';
 import ChooseCard from './ChooseCard';
+import Hint from './Hint';
 
 class Game extends React.Component {
 
@@ -357,7 +358,8 @@ class Game extends React.Component {
             } else {
                 this.setState({
                     askedCard: card,
-                    pickFromDeck: true
+                    pickFromDeck: true,
+                    message: "I don't have this card"
                 });
 
             }
@@ -404,6 +406,8 @@ class Game extends React.Component {
 
             <div className="game">
                 <Player key="pc" data={this.state.player1}/>
+
+                <Hint message={this.state.message}/>
 
                 <div className="board-no-mans-land"></div>
 
