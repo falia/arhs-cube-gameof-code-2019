@@ -224,6 +224,7 @@ class Game extends React.Component {
         let cardFound = this.checkCard(card, p2.cards);
 
         if (cardFound) {
+            cardFound["status"]="hidden";
             let add = [].concat(this.state.player1.cards, [cardFound]);
 
             console.log("my cards", p2.cards);
@@ -248,6 +249,7 @@ class Game extends React.Component {
 
                 let deckCard = this.state.deck[this.state.deck.length - 1];
 
+                deckCard["status"] = "hidden";
 
                 let newDeck = this.removeCard(deckCard, this.state.deck);
                 let lucaCards = [].concat(p1.cards, [deckCard]);
