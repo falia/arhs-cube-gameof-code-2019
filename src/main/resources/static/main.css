@@ -8,6 +8,10 @@ td, th {
     text-align: left;
 }
 
+.button {
+    cursor: pointer;
+}
+
 .Modal {
     top: 50%;
     left: 50%;
@@ -287,9 +291,11 @@ body {
     margin: 10px auto;
 }
 .button-start {
+    margin-top: 50px;
     border-radius: 50%;
     height: 200px;
     background-color: #EE8200 !important;
+    box-shadow: 0 0 75px rgba(0,0,0,.5);
 }
 
 .button:hover:enabled {
