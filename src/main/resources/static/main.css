@@ -27,7 +27,8 @@ td, th {
 }
 
 #react {
-    width: 1072px;
+    width: 100%;
+    align-content: center;
 }
 
 .game {
@@ -268,6 +269,11 @@ body {
     display: block;
     padding: 7px 0;
     margin: 10px auto;
+}
+.button-start {
+    border-radius: 50%;
+    height: 200px;
+    background-color: #EE8200 !important;
 }
 
 .button:hover:enabled {
