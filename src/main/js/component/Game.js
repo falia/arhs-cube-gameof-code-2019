@@ -2,6 +2,7 @@ import React from "react";
 import Player from './Player';
 import Actions from './Actions';
 import Deck from './Deck';
+import ChooseCard from './ChooseCard';
 
 class Game extends React.Component {
 
@@ -191,11 +192,22 @@ class Game extends React.Component {
                 }
             ],
 
-            show: false
+            show: false,
+
+            pickFromDeck: false,
+
+            currentCategory: null,
         };
 
         this.toggleShow = this.toggleShow.bind(this);
         this.handleChoseCard = this.handleChoseCard.bind(this);
+        this.changeCategory = this.changeCategory.bind(this);
+    }
+
+    changeCategory(c) {
+        this.setState({
+            currentCategory: c
+        })
     }
 
     toggleShow(show) {
@@ -207,6 +219,7 @@ class Game extends React.Component {
             let cardFound = this.checkCard(card, this.state.player2.cards);
 
             if (cardFound) {
+                this.toggleShow(false);
                 this.addCardAndCheckGame(cardFound);
             } else {
                 this.getFromDeck();
@@ -217,6 +230,7 @@ class Game extends React.Component {
             let cardFound = this.checkCard(card, this.state.player1.cards);
 
             if (cardFound) {
+                this.toggleShow(false);
                 this.addCardAndCheckGame(cardFound);
             } else {
                 this.getFromDeck();
@@ -225,7 +239,9 @@ class Game extends React.Component {
     }
 
     getFromDeck() {
-        alert("getFromDeck");
+        this.setState({
+            pickFromDeck: true
+        });
     }
 
     removeCard(card, array) {
@@ -260,21 +276,34 @@ class Game extends React.Component {
         }
     }
 
+
     render() {
         return (
 
             <div className="game">
                 <Player key="pc" data={this.state.player1}/>
-                <Deck data={this.state.deck}/>
+
                 <Player key="max" data={this.state.player2}/>
-                <Actions onChosenCard={this.handleChoseCard}
-                         matriceData={this.state.matriceData}
+                <Actions
                          show={this.state.show}
-                         handleToggle={this.toggleShow}/>
+                         handleToggle={this.toggleShow}>
+
+                    {this.state.pickFromDeck && <Deck
+                        cards={this.state.deck}
+                        onChosenCard={this.handleChoseCard}
+                        handleToggle={this.toggleShow}></Deck>}
+
+                    {!this.state.pickFromDeck && <ChooseCard
+                        matriceData={this.state.matriceData}
+                        onChosenCard={this.handleChoseCard}
+                        handleToggle={this.toggleShow}
+                        currentCategory={this.state.currentCategory}
+                        changeCategory={this.changeCategory}></ChooseCard>}
+
+                </Actions>
             </div>
         )
     }
 }
-
 
 export default Game;

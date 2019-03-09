@@ -1,6 +1,5 @@
 import React from "react";
 import PopPop from 'react-poppop';
-import Card from './Card';
 
 const overlay = {
     position: 'fixed',
@@ -25,62 +24,22 @@ const content = {
 
 class Actions extends React.Component {
 
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            currentCategory: null,
-        };
-
-        this.handleChosenCard = this.handleChosenCard.bind(this);
-    }
-
-    handleOnClickCategory(c) {
-        this.setState({
-            currentCategory: c
-        })
-    }
-
-    handleChosenCard(card) {
-        this.props.handleToggle(false);
-        this.props.onChosenCard(card);
-    }
 
     render() {
         return (
             <div>
-                <button className="btn btn-default" onClick={() => this.props.handleToggle(true)}>Card</button>
+                <button className="btn btn-default" onClick={() => this.props.handleToggle(true)}>Ask Card</button>
                 <PopPop position="centerCenter"
                         open={this.props.show}
                         onClose={() => this.props.handleToggle(false)}
                         overlayStyle={overlay}
                         contentStyle={content}>
 
-                    <div className="popup-header">
-                        <div className="popup-categories">
-                        {this.props.matriceData.map(c => {
-                            return (
-                                <span key={c.title} className="category-icon-choice">
-                                <img onClick={() => {
-                                    this.handleOnClickCategory(c)
-                                }} src={c.icon} width="20" height="20"></img>
-                            </span>
-                            )
+                    <div>
 
-                        })}
-                        </div>
-                    </div>
-                    <div className="popup-container">
-                        {this.state.currentCategory && this.state.currentCategory.subjects.map(s => {
-                            return (
+                        {this.props.children}
 
-                                <Card left="left" onChosenCard={this.handleChosenCard} key={this.state.currentCategory.title + "_" + s.title} data={{
-                                    player: this.props.player,
-                                    category: this.state.currentCategory,
-                                    subject: s
-                                }}/>
-                            )
-                        })}
                     </div>
                 </PopPop>
             </div>
