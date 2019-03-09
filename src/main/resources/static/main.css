@@ -67,7 +67,6 @@ td, th {
 
 .speech {
     position: absolute;
-    left: 60px;
     top: 90px;
     visibility: visible;
     opacity: 1;
