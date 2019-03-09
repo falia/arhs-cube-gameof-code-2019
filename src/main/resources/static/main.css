@@ -26,13 +26,32 @@ td, th {
     background-color: rebeccapurple;
 }
 
+.player-board {
+    width: 1024px;
+    height: 220px;
+    box-shadow: 0px 0px 40px grey;
+    margin: auto;
+    padding: 10px;
+    display: inline-block;
+    text-align: center;
+}
+
+.cards {
+    display: inline-block;
+}
+
 .board-card-frame {
     width: 120px;
     height: 200px;
     border: solid #6d4b41 2px;
     border-radius: 5px;
     box-shadow: 10px 20px 20px grey;
-    margin: 20px;
+    margin: 5px;
+    float: left;
+}
+
+.board-card-frame:hover {
+    transform: scale(1.1);
 }
 
 .board-card {
