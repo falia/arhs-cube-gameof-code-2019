@@ -43,6 +43,10 @@ td, th {
     font-weight: bold;
 }
 
+.board-card disabled {
+    box-shadow: inset 0px 0px 110px rgba(0, 0, 0, 0.9);
+    background-color: #959595;
+}
 
 .board-card>.category {
     color: #0a0a0a;
