@@ -1,5 +1,7 @@
 package com.greglturnquist.payroll.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.greglturnquist.payroll.data.CategoryTO;
 import com.greglturnquist.payroll.repository.Category;
 import com.greglturnquist.payroll.repository.CategoryRepository;
@@ -26,6 +28,8 @@ public class DataController {
         for (Category category : categoryRepository.findAll()) {
             categoryTO.add(new CategoryTO(category));
         }
-        return "";
+
+        Gson gson = new GsonBuilder().create();
+        return gson.toJson(categoryTO);
     }
 }
