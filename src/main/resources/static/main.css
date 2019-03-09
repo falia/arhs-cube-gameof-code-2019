@@ -40,6 +40,17 @@ td, th {
     display: inline-block;
 }
 
+@keyframes slideInFromBottom {
+    0% {
+        transform: translateY(5%);
+        transform: rotateY(-75deg);
+    }
+    100% {
+        transform: translateY(0);
+        transform: rotateY(0);
+    }
+}
+
 .board-card-frame {
     width: 120px;
     height: 200px;
@@ -48,6 +59,7 @@ td, th {
     box-shadow: 10px 20px 20px grey;
     margin: 5px;
     float: left;
+    animation: 0.65s cubic-bezier(0, 0, 0, 1.00) 0s 1 slideInFromBottom;
 }
 
 .board-card-frame:hover {
