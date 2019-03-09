@@ -9,7 +9,7 @@ class Game extends React.Component {
         super(props);
 
         this.state = {
-            currentPlayer: 'player1',
+            currentPlayer: 'player2',
 
             matriceData: [
                 {
@@ -145,7 +145,7 @@ class Game extends React.Component {
                 cards: [
                     {
                         category: {
-                            id: 1,
+                            id: 3,
                             title: "Sports",
                             icon: "/icons/icon-category-sport.png",
                             color: "#74c764",
@@ -165,7 +165,7 @@ class Game extends React.Component {
                             color: "#a5aee3",
                         },
                         subject: {
-                            id: 1,
+                            id: 2,
                             title: "S2",
                             thumbnail: "/thumbnails/1877-02-10_01-00001.jpg"
                         },
@@ -237,12 +237,14 @@ class Game extends React.Component {
     }
 
     addCardAndCheckGame(card) {
-        if (this.state.currentPlayer === 'player1') {
+        if (this.state.currentPlayer == 'player1') {
+            card["status"] = "hidden";
             this.state.player1.cards.push(card);
-            this.removeCard(card, this.state.player2);
+            this.removeCard(card, this.state.player2.cards);
         } else {
+            card["status"] = "visible";
             this.state.player2.cards.push(card);
-            this.removeCard(card, this.state.player1);
+            this.removeCard(card, this.state.player1.cards);
         }
     }
 
