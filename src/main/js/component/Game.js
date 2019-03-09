@@ -267,21 +267,15 @@ class Game extends React.Component {
     }
 
     handleChoseCardFromDeck(card) {
-
-
         let newDeck = this.removeCard(card, this.state.deck);
 
         let userCards = [];
         let currentPlayer = "";
-        if (this.state.currentPlayer == 'player1') {
-            card["status"] = "hidden";
-            userCards = [].concat(this.state.player1.cards, [card]);
-            currentPlayer = 'player1'
-        } else {
-            card["status"] = "visible";
-            userCards = [].concat(this.state.player2.cards, [card]);
-            currentPlayer = 'player2'
-        }
+
+        card["status"] = "visible";
+        userCards = [].concat(this.state.player2.cards, [card]);
+        currentPlayer = 'player2'
+
 
         let askedCard = this.state.askedCard;
 
@@ -296,6 +290,7 @@ class Game extends React.Component {
             pickFromDeck: false,
             currentCategory: null,
             deck: newDeck,
+            show:false
         };
 
         data[currentPlayer] = {
@@ -305,93 +300,52 @@ class Game extends React.Component {
 
         if(! (card.category.id == askedCard.category.id && card.subject.id == askedCard.subject.id)) {
             console.log("change turn");
-            data["currentPlayer"]= currentPlayer=='player1'?'player2':'player1';
+            data["currentPlayer"]= 'player1';
             console.log(data);
-            this.setState(data, this.lucaPlayWithTimeOut.bind(this));
+            this.setState(data, this.checkWhoOne.bind(this) && this.lucaPlayWithTimeOut.bind(this));
         } else {
             console.log("continue");
-
-            this.setState(data);
+            this.setState(data, this.checkWhoOne.bind(this));
         }
     }
 
     handleChoseCardFromPlayer(card) {
-
         let p1 = this.state.player1;
         let p2 = this.state.player2;
 
+        let cardFound = this.checkCard(card, this.state.player1.cards);
 
-        if (this.state.currentPlayer === 'player1') {
-            let cardFound = this.checkCard(card, this.state.player2.cards);
+        if (cardFound) {
+            console.log("found card in p1");
 
-            if (cardFound) {
-                console.log("found card");
+            this.toggleShow(false);
 
-                this.toggleShow(false);
-
-                card["status"] = "hidden";
-                let add = [].concat(this.state.player1.cards, [card]);
+            card["status"] = "visible";
+            let add = [].concat(this.state.player2.cards, [card]);
 
 
-                console.log(this.state.player2.cards);
-                let remove = this.removeCard(card, this.state.player2.cards);
-                console.log(remove);
+            console.log(this.state.player1.cards);
+            let remove = this.removeCard(card, this.state.player1.cards);
+            console.log(remove);
 
-                this.setState({
-                    player1:{
-                        cards:add,
-                        summary:p1.summary
-                    },
-                    player2:{
-                        cards:remove,
-                        summary:p2.summary
-                    }
-                });
-            } else {
-                this.setState({
-                    askedCard: card,
-                    pickFromDeck: true
-                });
-
-            }
-        }
-
-        if (this.state.currentPlayer === 'player2') {
-
-            let cardFound = this.checkCard(card, this.state.player1.cards);
-
-            if (cardFound) {
-                console.log("found card in p1");
-
-                this.toggleShow(false);
-
-                card["status"] = "visible";
-                let add = [].concat(this.state.player2.cards, [card]);
-
-
-                console.log(this.state.player1.cards);
-                let remove = this.removeCard(card, this.state.player1.cards);
-                console.log(remove);
-
-                this.setState({
-                    player1:{
-                        cards:remove,
-                        summary:p1.summary
-                    },
-                    player2:{
-                        cards:add,
-                        summary:p2.summary
-                    }
-                });
-            } else {
+            this.setState({
+                player1: {
+                    cards: remove,
+                    summary: p1.summary
+                },
+                player2: {
+                    cards: add,
+                    summary: p2.summary
+                }
+            },  this.checkWhoOne.bind(this));
+        } else {
                 this.setState({
                     askedCard: card,
                     pickFromDeck: true,
                     message: "I don't have this card"
-                });
-
-            }
+                },  this.checkWhoOne.bind(this));
         }
+
     }
 
     removeCard(card, array) {
@@ -400,18 +354,6 @@ class Game extends React.Component {
         });
 
         return filtered;
-    }
-
-    addCardAndCheckGame(card) {
-        if (this.state.currentPlayer == 'player1') {
-            card["status"] = "hidden";
-            this.state.player1.cards.push(card);
-            this.removeCard(card, this.state.player2.cards);
-        } else {
-            card["status"] = "visible";
-            this.state.player2.cards.push(card);
-            this.removeCard(card, this.state.player1.cards);
-        }
     }
 
     checkCard(card, cards) {
@@ -447,7 +389,6 @@ class Game extends React.Component {
     }
 
     lucaPlay() {
-
         let msg ="LUCA is playing !.";
 
         let p1 = this.state.player1;
@@ -477,39 +418,55 @@ class Game extends React.Component {
                     cards:remove,
                     summary:p2.summary
                 }
-            }, this.lucaPlayWithTimeOut);
+            }, this.checkWhoOne.bind(this) && this.lucaPlayWithTimeOut);
         } else {
-            msg = msg + " You do not have the card I asked, so I picked one from the deck.";
-
-            let deckCard = this.state.deck[this.state.deck.length-1];
-            let newDeck = this.removeCard(card, this.state.deck);
-            let lucaCards = [].concat(this.state.player1.cards, [deckCard]);
-
-            let data = {
-                askedCard: null,
-                pickFromDeck: false,
-                currentCategory: null,
-                deck: newDeck,
-                player1: {
-                    cards: lucaCards,
-                    summary: luca.summary
-                }
-            };
-
-            if(! (deckCard.category.id == card.category.id && deckCard.subject.id == card.subject.id)) {
-                msg = msg + " The card from the deck is different. Your turn !";
-
-                console.log("change turn");
-                data["currentPlayer"]="player2";
-                console.log(data);
-                data["message"] = msg;
-                this.setState(data);
+            if(this.state.deck.length === 0){
+                    this.checkWhoOne();
             } else {
-                console.log("continue");
-                msg = msg + " The card from the deck is the one I asked !!";
-                data["message"] = msg;
-                this.setState(data, this.lucaPlayWithTimeOut);
+                msg = msg + " You do not have the card I asked, so I picked one from the deck.";
+
+                let deckCard = this.state.deck[this.state.deck.length-1];
+
+
+                let newDeck = this.removeCard(card, this.state.deck);
+                let lucaCards = [].concat(this.state.player1.cards, [deckCard]);
+
+                let data = {
+                    askedCard: null,
+                    pickFromDeck: false,
+                    currentCategory: null,
+                    deck: newDeck,
+                    player1: {
+                        cards: lucaCards,
+                        summary: luca.summary
+                    }
+                };
+
+                if(! (deckCard.category.id == card.category.id && deckCard.subject.id == card.subject.id)) {
+                    msg = msg + " The card from the deck is different. Your turn !";
+
+                    console.log("change turn");
+                    data["currentPlayer"]="player2";
+                    console.log(data);
+                    data["message"] = msg;
+                    this.setState(data, this.checkWhoOne.bind(this));
+                } else {
+                    console.log("continue");
+                    msg = msg + " The card from the deck is the one I asked !!";
+                    data["message"] = msg;
+                    this.setState(data, this.checkWhoOne.bind(this) && this.lucaPlayWithTimeOut);
+                }
             }
+        }
+    }
+
+    checkWhoOne() {
+        if(this.state.deck.length === 0) {
+
+
+        } else {
+            
+
 
         }
     }

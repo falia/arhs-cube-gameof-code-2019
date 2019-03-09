@@ -11,7 +11,7 @@ class ChooseCard extends React.Component {
                     <div className="popup-categories">
                         {this.props.matriceData.map(c => {
                             return (
-                                <Tooltip content={c.title} zIndex={55} fontFamily={"Calibri"} padding={10}>
+                                <Tooltip key={"T_3" + c.title} content={c.title} zIndex={55} fontFamily={"Calibri"} padding={10}>
                                     <span key={c.title} className="category-icon-choice">
                                     <img onClick={() => {
                                         this.props.changeCategory(c)
