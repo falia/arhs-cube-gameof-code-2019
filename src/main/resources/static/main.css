@@ -48,4 +48,15 @@ td, th {
 .category>.category-icon {
     width: 20px;
     height: 20px;
+    float: left;
+}
+.category>.category-title {
+    text-align: center;
+}
+
+.subject>.subject-body {
+}
+.subject>.subject-footer {
+    height: 20px;
+    text-align: center;
 }
