@@ -19,7 +19,7 @@ const content = {
     zIndex: 2000,
     position: 'relative',
     boxShadow: '0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28)',
-    padding: '10px 20px',
+    padding: '10px 50px',
     overflow: 'auto'
 };
 
@@ -56,7 +56,8 @@ class Actions extends React.Component {
                         overlayStyle={overlay}
                         contentStyle={content}>
 
-                    <div>
+                    <div className="popup-header">
+                        <div className="popup-categories">
                         {this.props.matriceData.map(c => {
                             return (
                                 <span key={c.title} className="category-icon-choice">
@@ -67,9 +68,9 @@ class Actions extends React.Component {
                             )
 
                         })}
+                        </div>
                     </div>
-                    <br/>
-                    <div >
+                    <div className="popup-container">
                         {this.state.currentCategory && this.state.currentCategory.subjects.map(s => {
                             return (
 
