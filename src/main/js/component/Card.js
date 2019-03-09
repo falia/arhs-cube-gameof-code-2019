@@ -21,15 +21,13 @@ class Card extends React.Component {
                         </div>
 
                     </div>
-                    <div className="subject">
+                    <div className="subject" style={{height: 0}}>
                         <div className="subject-body">
                             <img src={this.props.data.subject.thumbnail} width="100%" height="120"></img>
                         </div>
-                        <div>
-                            {this.props.left ? null : <div className="pdf-icon">
-                                <img onClick={()=> window.open(this.props.data.url, "_blank")} src="/icons/magnifier.png" width="40" height="40"></img>
-                            </div>}
-                        </div>
+                        {this.props.left ? null : <div className="pdf-icon">
+                            <img onClick={()=> window.open(this.props.data.url, "_blank")} src="/icons/magnifier.png" width="40" height="40"></img>
+                        </div>}
                     </div>
                 </div>
 

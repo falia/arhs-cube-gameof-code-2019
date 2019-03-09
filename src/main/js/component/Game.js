@@ -372,7 +372,7 @@ class Game extends React.Component {
 
                 </div>
                 }
-
+                {! this.state.start && <img src="/images/deer.png" style={{width: '150px', height: '150px', opacity: 0.4}}></img>}
                 {! this.state.start && <button className="button button-start" onClick={e=> this.fetchGame()}>
                     Start
                 </button>}
