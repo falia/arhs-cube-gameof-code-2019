@@ -38,7 +38,7 @@ public class CultureDocuments {
     public List<DocumentUrl> createLiteratureDocuments() {
         List<DocumentUrl> documents = new ArrayList<>();
         documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=1908571&custom_att_2=direct")));
-        documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=1908548&custom_att_2=direct")));
+//        documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=1908548&custom_att_2=direct")));
         return documents;
     }
 
@@ -52,7 +52,7 @@ public class CultureDocuments {
     public List<DocumentUrl> createExpositionDocuments() {
         List<DocumentUrl> documents = new ArrayList<>();
         documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=3494493&custom_att_2=direct")));
-        documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=3494714&custom_att_2=direct")));
+//        documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=3494714&custom_att_2=direct")));
         return documents;
     }
 

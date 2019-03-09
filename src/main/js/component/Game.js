@@ -4,8 +4,7 @@ import Actions from './Actions';
 import Deck from './Deck';
 import ChooseCard from './ChooseCard';
 import Hint from './Hint';
-import PopPop from 'react-poppop';
-import Card from "./Card";
+var api = require('../utils/api');
 
 const overlay = {
     position: 'fixed',
@@ -30,10 +29,39 @@ const content = {
 
 class Game extends React.Component {
 
+    fetchGame() {
+        let thisVar = this;
+        api.fetchGame().then(function (data) {
+
+            let state = {
+                start: true,
+                matriceData: data[0],
+                player1: {
+                    cards: data[1].player1,
+                    summary: {
+                        score: 0
+                    }
+                },
+                player2: {
+                    cards: data[2].player2,
+                    summary: {
+                        score: 0
+                    }
+                },
+                deck: data[3].deck
+            };
+
+            thisVar.setState(state);
+
+        })
+    }
+
     constructor(props) {
         super(props);
 
         this.state = {
+            start : false,
+
             currentPlayer: 'player2',
 
             matriceData: [
@@ -290,7 +318,7 @@ class Game extends React.Component {
             pickFromDeck: false,
             currentCategory: null,
             deck: newDeck,
-            show:false
+            show: false
         };
 
         data[currentPlayer] = {
@@ -298,9 +326,9 @@ class Game extends React.Component {
             summary: user.summary
         };
 
-        if(! (card.category.id == askedCard.category.id && card.subject.id == askedCard.subject.id)) {
+        if (!(card.category.id == askedCard.category.id && card.subject.id == askedCard.subject.id)) {
             console.log("change turn");
-            data["currentPlayer"]= 'player1';
+            data["currentPlayer"] = 'player1';
             console.log(data);
             this.setState(data, this.checkWhoOne.bind(this) && this.lucaPlayWithTimeOut.bind(this));
         } else {
@@ -337,13 +365,13 @@ class Game extends React.Component {
                     cards: add,
                     summary: p2.summary
                 }
-            },  this.checkWhoOne.bind(this));
+            }, this.checkWhoOne.bind(this));
         } else {
-                this.setState({
-                    askedCard: card,
-                    pickFromDeck: true,
-                    message: "I don't have this card"
-                },  this.checkWhoOne.bind(this));
+            this.setState({
+                askedCard: card,
+                pickFromDeck: true,
+                message: "I don't have this card"
+            }, this.checkWhoOne.bind(this));
         }
 
     }
@@ -384,12 +412,12 @@ class Game extends React.Component {
         return card;
     }
 
-    lucaPlayWithTimeOut(){
+    lucaPlayWithTimeOut() {
         setTimeout(this.lucaPlay.bind(this), 5000)
     }
 
     lucaPlay() {
-        let msg ="LUCA is playing !.";
+        let msg = "LUCA is playing !.";
 
         let p1 = this.state.player1;
         let p2 = this.state.player2;
@@ -400,7 +428,7 @@ class Game extends React.Component {
 
         let cardFound = this.checkCard(card, this.state.player1.cards);
 
-        if(cardFound) {
+        if (cardFound) {
             let add = [].concat(this.state.player1.cards, [cardFound]);
 
             console.log("my cards", this.state.player2.cards);
@@ -410,22 +438,22 @@ class Game extends React.Component {
 
             this.setState({
                 message: msg,
-                player1:{
-                    cards:add,
-                    summary:p1.summary
+                player1: {
+                    cards: add,
+                    summary: p1.summary
                 },
-                player2:{
-                    cards:remove,
-                    summary:p2.summary
+                player2: {
+                    cards: remove,
+                    summary: p2.summary
                 }
             }, this.checkWhoOne.bind(this) && this.lucaPlayWithTimeOut);
         } else {
-            if(this.state.deck.length === 0){
-                    this.checkWhoOne();
+            if (this.state.deck.length === 0) {
+                this.checkWhoOne();
             } else {
                 msg = msg + " You do not have the card I asked, so I picked one from the deck.";
 
-                let deckCard = this.state.deck[this.state.deck.length-1];
+                let deckCard = this.state.deck[this.state.deck.length - 1];
 
 
                 let newDeck = this.removeCard(card, this.state.deck);
@@ -442,11 +470,11 @@ class Game extends React.Component {
                     }
                 };
 
-                if(! (deckCard.category.id == card.category.id && deckCard.subject.id == card.subject.id)) {
+                if (!(deckCard.category.id == card.category.id && deckCard.subject.id == card.subject.id)) {
                     msg = msg + " The card from the deck is different. Your turn !";
 
                     console.log("change turn");
-                    data["currentPlayer"]="player2";
+                    data["currentPlayer"] = "player2";
                     console.log(data);
                     data["message"] = msg;
                     this.setState(data, this.checkWhoOne.bind(this));
@@ -461,12 +489,9 @@ class Game extends React.Component {
     }
 
     checkWhoOne() {
-        if(this.state.deck.length === 0) {
-
-
+        if (this.state.deck.length === 0) {
+            alert("End.")
         } else {
-            
-
 
         }
     }
@@ -475,39 +500,52 @@ class Game extends React.Component {
 
         return (
 
-            <div className="game">
-                <Player key="pc" data={this.state.player1}/>
 
-                <Hint message={this.state.message}/>
+            <div className='container'>
 
-                <div className="board-no-mans-land">
-                    Your turn: {
-                    this.state.currentPlayer === 'player1' ? 'LU-CA' : "MAX"
-                }
+
+                {this.state.start &&
+
+                <div className="game">
+                    <Player key="pc" data={this.state.player1}/>
+
+                    <Hint message={this.state.message}/>
+
+                    <div className="board-no-mans-land">
+                        Your turn: {
+                        this.state.currentPlayer === 'player1' ? 'LU-CA' : "MAX"
+                    }
+
+                    </div>
+
+                    <Player key="max" data={this.state.player2}/>
+
+                    {this.state.currentPlayer == 'player2' &&
+                    <Actions
+                        show={this.state.show}
+                        handleToggle={this.toggleShow}>
+
+                        {this.state.pickFromDeck && <Deck
+                            cards={this.state.deck}
+                            onChosenCard={this.handleChoseCardFromDeck}
+                            handleToggle={this.toggleShow}></Deck>}
+
+                        {!this.state.pickFromDeck && <ChooseCard
+                            matriceData={this.state.matriceData}
+                            onChosenCard={this.handleChoseCardFromPlayer}
+                            handleToggle={this.toggleShow}
+                            currentCategory={this.state.currentCategory}
+                            changeCategory={this.changeCategory}></ChooseCard>}
+
+                    </Actions>
+                    }
 
                 </div>
-
-                <Player key="max" data={this.state.player2}/>
-
-                {this.state.currentPlayer == 'player2' &&
-                <Actions
-                         show={this.state.show}
-                         handleToggle={this.toggleShow}>
-
-                    {this.state.pickFromDeck && <Deck
-                        cards={this.state.deck}
-                        onChosenCard={this.handleChoseCardFromDeck}
-                        handleToggle={this.toggleShow}></Deck>}
-
-                    {!this.state.pickFromDeck && <ChooseCard
-                        matriceData={this.state.matriceData}
-                        onChosenCard={this.handleChoseCardFromPlayer}
-                        handleToggle={this.toggleShow}
-                        currentCategory={this.state.currentCategory}
-                        changeCategory={this.changeCategory}></ChooseCard>}
-
-                </Actions>
                 }
+
+                {! this.state.start && <button className="button" onClick={e=> this.fetchGame()}>
+                    Start
+                </button>}
 
             </div>
         )

@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/spring-guides/tut-react-and-spring-data-rest",
   "dependencies": {
+    "axios": "^0.18.0",
     "react": "^16.5.2",
     "react-alert": "^5.2.0",
     "react-dom": "^16.5.2",

@@ -22,7 +22,7 @@ public class DataController {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    @RequestMapping(value = "/api/s", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/api/startup", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public String requestData() {
 
@@ -77,7 +77,9 @@ public class DataController {
 
         for (CategoryTO category : categoryTOS) {
             for (SubjectTO subject :category.getSubjects()) {
-                String url = subject.getUrls().get(0);
+                Random rand = new Random();
+                int value = rand.nextInt(subject.getUrls().size());
+                String url = subject.getUrls().get(value);
                 cards.add(new CardTO(category, subject, url, "hidden"));
             }
         }
