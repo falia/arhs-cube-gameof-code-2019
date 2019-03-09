@@ -48,8 +48,8 @@ public class CategoryTO {
     public CategoryTO(Long id, String title){
         this.id = id;
         this.title = title;
-        this.icon = iconMap.get(iconMap.get(title));
-        this.color = colorMap.get(colorMap.get(title));
+        this.icon = iconMap.get(title);
+        this.color = colorMap.get(title);
     }
 
     public List<SubjectTO> getSubjects() {
