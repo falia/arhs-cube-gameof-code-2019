@@ -49,15 +49,16 @@ td, th {
 
 .speech-bubble {
     display: inline-block;
-    position: relative;
     background: #ffffff;
     border-radius: 2.4em;
     padding: 5px 60px;
-    margin-left: -25%;
-    margin-top: 10px;
+    margin-left: -33%;
+    margin-top: -13%;
     box-shadow: 0px 0px 20px grey;
     font-family: Calibri;
     font-weight: bold;
+    position: absolute;
+    height: 12%;
 }
 
 .speech {
