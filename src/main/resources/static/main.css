@@ -62,7 +62,9 @@ td, th {
 }
 
 .subject>.subject-body {
+    margin-top: 10px;
 }
+
 .subject>.subject-footer {
     height: 20px;
     text-align: center;

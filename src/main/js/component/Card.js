@@ -16,6 +16,7 @@ class Card extends React.Component {
                     </div>
                     <div className="subject">
                         <div className="subject-body">
+                            <img src={this.props.data.subject.thumbnail} width="100%" height="120"></img>
                         </div>
                         <div className="subject-footer">
                             {this.props.data.subject.title}

@@ -19,12 +19,15 @@ class Game extends React.Component {
                     subjects: [
                         {
                             title: "S1",
+                            thumbnail: "/thumbnails/1877-01-07_01-00001.jpg"
                         },
                         {
                             title: "S2",
+                            thumbnail: "/thumbnails/1877-01-13_01-00001.jpg"
                         },
                         {
                             title: "S3",
+                            thumbnail: "/thumbnails/1877-02-03_01-00001.jpg"
                         }
                     ]
                 },
@@ -36,12 +39,15 @@ class Game extends React.Component {
                     subjects: [
                         {
                             title: "S1",
+                            thumbnail: "/thumbnails/1877-01-09_01-00001.jpg"
                         },
                         {
                             title: "S2",
+                            thumbnail: "/thumbnails/1877-02-10_01-00001.jpg"
                         },
                         {
                             title: "S3",
+                            thumbnail: "/thumbnails/1877-09-30_01-00001.jpg"
                         }
                     ]
                 },
@@ -53,6 +59,7 @@ class Game extends React.Component {
                     subjects: [
                         {
                             title: "S1",
+                            thumbnail: "/thumbnails/1877-10-20_01-00001.jpg"
                         },
                         {
                             title: "S2",
@@ -90,7 +97,8 @@ class Game extends React.Component {
                             color: "#e9c996",
                         },
                         subject: {
-                            title: "S1"
+                            title: "S1",
+                            thumbnail: "/thumbnails/1877-01-07_01-00001.jpg"
                         }
                     },
                     {
@@ -100,7 +108,8 @@ class Game extends React.Component {
                             color: "#a5aee3",
                         },
                         subject: {
-                            title: "S1"
+                            title: "S1",
+                            thumbnail: "/thumbnails/1877-01-09_01-00001.jpg"
                         }
                     }
                 ],
@@ -119,7 +128,8 @@ class Game extends React.Component {
                             color: "#e9c996"
                         },
                         subject: {
-                            title: "S2"
+                            title: "S2",
+                            thumbnail: "/thumbnails/1877-01-13_01-00001.jpg"
                         }
                     },
                     {
@@ -129,7 +139,8 @@ class Game extends React.Component {
                             color: "#836123"
                         },
                         subject: {
-                            title: "S2"
+                            title: "S2",
+                            thumbnail: "/thumbnails/1877-02-10_01-00001.jpg"
                         }
                     }
                 ],
