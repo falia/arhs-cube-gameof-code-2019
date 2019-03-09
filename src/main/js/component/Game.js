@@ -4,6 +4,29 @@ import Actions from './Actions';
 import Deck from './Deck';
 import ChooseCard from './ChooseCard';
 import Hint from './Hint';
+import PopPop from 'react-poppop';
+import Card from "./Card";
+
+const overlay = {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    zIndex: 99,
+    backgroundColor: 'transparent'
+};
+
+const content = {
+    transition: 'all 0.3s',
+    backgroundColor: 'white',
+    borderRadius: '3px',
+    zIndex: 2000,
+    position: 'relative',
+    boxShadow: '0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28)',
+    padding: '10px 50px',
+    overflow: 'auto'
+};
 
 class Game extends React.Component {
 
@@ -221,7 +244,10 @@ class Game extends React.Component {
 
             askedCard: null,
 
-            currentCategory: null,
+            lucaState: {
+                card: null,
+                message: '',
+            }
         };
 
         this.toggleShow = this.toggleShow.bind(this);
@@ -281,7 +307,7 @@ class Game extends React.Component {
             console.log("change turn");
             data["currentPlayer"]= currentPlayer=='player1'?'player2':'player1';
             console.log(data);
-            this.setState(data);
+            this.setState(data, this.lucaPlayWithTimeOut.bind(this));
         } else {
             console.log("continue");
 
@@ -400,9 +426,95 @@ class Game extends React.Component {
         }
     }
 
+    getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    randomCard() {
+        let category = this.getRandomInt(this.state.matriceData.length);
+        let subject = this.getRandomInt(this.state.matriceData[category].subjects.length);
+
+        let card = {
+            category: this.state.matriceData[category],
+            subject: this.state.matriceData[category].subjects[subject]
+        };
+
+        return card;
+    }
+
+    lucaPlayWithTimeOut(){
+        setTimeout(this.lucaPlay.bind(this), 5000)
+    }
+
+    lucaPlay() {
+
+        let msg ="LUCA is playing !.";
+
+        let p1 = this.state.player1;
+        let p2 = this.state.player2;
+
+        let luca = this.state.player1;
+
+        let card = this.randomCard();
+
+        let cardFound = this.checkCard(card, this.state.player1.cards);
+
+        if(cardFound) {
+            let add = [].concat(this.state.player1.cards, [cardFound]);
+
+            console.log("my cards", this.state.player2.cards);
+            let remove = this.removeCard(cardFound, this.state.player2.cards);
+            console.log("my cards", remove);
+            msg = msg + " Great You have card.";
+
+            this.setState({
+                message: msg,
+                player1:{
+                    cards:add,
+                    summary:p1.summary
+                },
+                player2:{
+                    cards:remove,
+                    summary:p2.summary
+                }
+            }, this.lucaPlayWithTimeOut);
+        } else {
+            msg = msg + " You do not have the card I asked, so I picked one from the deck.";
+
+            let deckCard = this.state.deck[this.state.deck.length-1];
+            let newDeck = this.removeCard(card, this.state.deck);
+            let lucaCards = [].concat(this.state.player1.cards, [deckCard]);
+
+            let data = {
+                askedCard: null,
+                pickFromDeck: false,
+                currentCategory: null,
+                deck: newDeck,
+                player1: {
+                    cards: lucaCards,
+                    summary: luca.summary
+                }
+            };
+
+            if(! (deckCard.category.id == card.category.id && deckCard.subject.id == card.subject.id)) {
+                msg = msg + " The card from the deck is different. Your turn !";
+
+                console.log("change turn");
+                data["currentPlayer"]="player2";
+                console.log(data);
+                data["message"] = msg;
+                this.setState(data);
+            } else {
+                console.log("continue");
+                msg = msg + " The card from the deck is the one I asked !!";
+                data["message"] = msg;
+                this.setState(data, this.lucaPlayWithTimeOut);
+            }
+
+        }
+    }
 
     render() {
-
 
         return (
 
@@ -439,6 +551,7 @@ class Game extends React.Component {
 
                 </Actions>
                 }
+
             </div>
         )
     }
