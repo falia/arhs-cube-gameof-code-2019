@@ -26,20 +26,32 @@ td, th {
     background-color: rebeccapurple;
 }
 
+.game {
+    width: 1100px;
+    height: 100%;
+    box-shadow: inset 0px 0px 400px #577a88d6;
+    margin: auto;
+    padding: 10px;
+    display: inline-block;
+    text-align: center;
+    background-color: #20d8ff1c;
+}
+
+
 .board-no-mans-land {
     width: 1064px;
-    height: 320px;
+    height: 200px;
 }
 
 .speech-bubble {
     display: inline-block;
     position: relative;
-    background: #e8e8e8;
+    background: #ffffff;
     border-radius: 2.4em;
     padding: 5px 60px;
-    margin-left: 60px;
+    margin-left: -25%;
     margin-top: 10px;
-    box-shadow: 0px 0px 40px grey;
+    box-shadow: 0px 0px 20px grey;
     font-family: Calibri;
     font-weight: bold;
 }
@@ -53,7 +65,7 @@ td, th {
 .speech.hidden {;
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0s linear 300ms, opacity 300ms;
+    transition: visibility 0s linear 300ms, opacity 800ms;
 }
 
 .speech-bubble:after {
@@ -64,7 +76,7 @@ td, th {
     width: 0;
     height: 0;
     border: 58px solid transparent;
-    border-bottom-color: #aeaeae;
+    border-bottom-color: #ffffff;
     border-top: 0;
     border-right: 0;
     margin-left: -29px;
@@ -72,13 +84,14 @@ td, th {
 }
 
 .player-board {
-    width: 1024px;
-    height: 220px;
+    width: 1072px;
+    height: 100%;
     box-shadow: 0px 0px 40px grey;
     margin: auto;
     padding: 10px;
     display: inline-block;
     text-align: center;
+
 }
 
 .cards {

@@ -222,7 +222,7 @@ class Game extends React.Component {
         this.setState({bubbleText: message, showBubble: true});
         setTimeout(function() {
             this.setState({showBubble: false})
-        }.bind(this), 2000)
+        }.bind(this), 3000)
     }
 
     handleChoseCard(card) {
