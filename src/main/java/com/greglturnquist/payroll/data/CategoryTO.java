@@ -10,19 +10,19 @@ import java.util.Map;
 
 public class CategoryTO {
 
-    private static Map<Long, String> iconMap = new HashMap<>();
-    private static Map<Long, String> colorMap = new HashMap<>();
+    private static Map<String, String> iconMap = new HashMap<>();
+    private static Map<String, String> colorMap = new HashMap<>();
 
     static {
-        iconMap.put(1L, "/icons/icon-category-economy.png");
-        iconMap.put(2L, "/icons/icon-category-politic.png");
-        iconMap.put(3L, "/icons/icon-category-sport.png");
-        iconMap.put(4L, "/icons/icon-category-technology.png");
+        iconMap.put("Economy", "/icons/icon-category-economy.png");
+        iconMap.put("Politics", "/icons/icon-category-politic.png");
+        iconMap.put("Sport", "/icons/icon-category-sport.png");
+        iconMap.put("Technology", "/icons/icon-category-technology.png");
 
-        colorMap.put(1L, "#e9c996");
-        colorMap.put(2L, "#a5aee3");
-        colorMap.put(3L, "#74c764");
-        colorMap.put(4L, "#836123");
+        colorMap.put("Economy", "#e9c996");
+        colorMap.put("Politics", "#a5aee3");
+        colorMap.put("Sport", "#74c764");
+        colorMap.put("Technology", "#836123");
     }
 
     private Long id;
@@ -35,8 +35,8 @@ public class CategoryTO {
     public CategoryTO(Category category) {
         this.id = category.getId();
         this.title = category.getName();
-        this.icon = iconMap.get(category.getId());
-        this.color = colorMap.get(category.getId());
+        this.icon = iconMap.get(category.getName());
+        this.color = colorMap.get(category.getName());
         for (Subject subject : category.getSubjects()) {
             SubjectTO subjectTO = new SubjectTO(subject);
             getSubjects().add(subjectTO);
@@ -46,8 +46,8 @@ public class CategoryTO {
     public CategoryTO(Long id, String title){
         this.id = id;
         this.title = title;
-        this.icon = iconMap.get(id);
-        this.color = colorMap.get(id);
+        this.icon = iconMap.get(iconMap.get(title));
+        this.color = colorMap.get(colorMap.get(title));
     }
 
     public List<SubjectTO> getSubjects() {
@@ -71,5 +71,13 @@ public class CategoryTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public String getColor() {
+        return color;
     }
 }
