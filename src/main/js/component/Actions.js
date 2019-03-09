@@ -7,7 +7,7 @@ const overlay = {
     left: 0,
     width: '100%',
     height: '100%',
-    zIndex: 99,
+    zIndex: 50,
     backgroundColor: 'transparent'
 };
 
@@ -15,11 +15,12 @@ const content = {
     transition: 'all 0.3s',
     backgroundColor: 'white',
     borderRadius: '3px',
-    zIndex: 2000,
+    zIndex: 51,
     position: 'relative',
     boxShadow: '0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28)',
     padding: '10px 50px',
-    overflow: 'auto'
+    overflow: 'auto',
+    paddingTop: '60px'
 };
 
 class Actions extends React.Component {

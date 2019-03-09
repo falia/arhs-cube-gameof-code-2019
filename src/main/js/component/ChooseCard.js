@@ -1,5 +1,6 @@
 import React from "react";
 import Card from './Card';
+import Tooltip from "react-simple-tooltip"
 
 class ChooseCard extends React.Component {
     render() {
@@ -10,11 +11,13 @@ class ChooseCard extends React.Component {
                     <div className="popup-categories">
                         {this.props.matriceData.map(c => {
                             return (
-                                <span key={c.title} className="category-icon-choice">
-                                <img onClick={() => {
-                                    this.props.changeCategory(c)
-                                }} src={c.icon} width="20" height="20"></img>
-                            </span>
+                                <Tooltip content={c.title} zIndex={55} fontFamily={"Calibri"} padding={10}>
+                                    <span key={c.title} className="category-icon-choice">
+                                    <img onClick={() => {
+                                        this.props.changeCategory(c)
+                                    }} src={c.icon} width="20" height="20"></img>
+                                </span>
+                                </Tooltip>
                             )
 
                         })}
