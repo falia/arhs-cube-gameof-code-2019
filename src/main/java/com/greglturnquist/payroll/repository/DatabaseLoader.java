@@ -15,6 +15,7 @@
  */
 package com.greglturnquist.payroll.repository;
 
+import com.greglturnquist.payroll.data.EconomyDocuments;
 import com.greglturnquist.payroll.data.ScienceDocuments;
 import com.greglturnquist.payroll.data.SportDocuments;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,8 @@ public class DatabaseLoader implements CommandLineRunner {
     private ScienceDocuments scienceDocuments;
     @Autowired
     private SportDocuments sportDocuments;
+    @Autowired
+    private EconomyDocuments economyDocuments;
 
     @Autowired
     public DatabaseLoader(CategoryRepository repository, SubjectRepository subjectRepository) {
@@ -103,12 +106,12 @@ public class DatabaseLoader implements CommandLineRunner {
 
     private List<Subject> createEconomySubjects() {
         ArrayList<Subject> subjects = new ArrayList<>();
-        subjects.add(createSubject("International"));
-        subjects.add(createSubject("National"));
-        subjects.add(createSubject("Job"));
-        subjects.add(createSubject("Market"));
-        subjects.add(createSubject("Real state"));
-        subjects.add(createSubject("Macro economy"));
+        subjects.add(createSubject("International").addAllDocument(economyDocuments.createInternationalDocuments()));
+        subjects.add(createSubject("National").addAllDocument(economyDocuments.createNationalDocuments()));
+        subjects.add(createSubject("Job").addAllDocument(economyDocuments.createJobsDocuments()));
+        subjects.add(createSubject("Market").addAllDocument(economyDocuments.createMarketDocuments()));
+        subjects.add(createSubject("Real state").addAllDocument(economyDocuments.createRealStateDocuments()));
+        subjects.add(createSubject("Macro economy").addAllDocument(economyDocuments.createMacroEconomyDocuments()));
         return subjects;
     }
 
