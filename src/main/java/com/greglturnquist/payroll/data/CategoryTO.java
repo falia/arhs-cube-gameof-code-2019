@@ -24,7 +24,7 @@ public class CategoryTO {
         colorMap.put("Politic", "#a5aee3");
         colorMap.put("Sport", "#74c764");
         colorMap.put("Science", "#836123");
-        iconMap.put("Culture", "#836537");
+        colorMap.put("Culture", "#836537");
     }
 
     private Long id;
