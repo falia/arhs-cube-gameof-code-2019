@@ -16,6 +16,9 @@ class Card extends React.Component {
                         <div className="category-title">
                             {this.props.data.category.title}
                         </div>
+                        <div className="subject-footer">
+                            {this.props.data.subject.title}
+                        </div>
 
                     </div>
                     <div className="subject">
@@ -23,12 +26,9 @@ class Card extends React.Component {
                             <img src={this.props.data.subject.thumbnail} width="100%" height="120"></img>
                         </div>
                         <div>
-                            <div className="category-icon">
-                                <img onClick={()=> window.open(this.props.data.url, "_blank")} src="/icons/magnifier.png" width="30" height="30"></img>
-                            </div>
-                            <div className="subject-footer">
-                                {this.props.data.subject.title}
-                            </div>
+                            {this.props.left ? null : <div className="pdf-icon">
+                                <img onClick={()=> window.open(this.props.data.url, "_blank")} src="/icons/magnifier.png" width="40" height="40"></img>
+                            </div>}
                         </div>
                     </div>
                 </div>
