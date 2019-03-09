@@ -3,6 +3,7 @@ package com.greglturnquist.payroll.data;
 import com.greglturnquist.payroll.repository.DocumentUrl;
 import com.greglturnquist.payroll.repository.Subject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SubjectTO {
@@ -17,8 +18,36 @@ public class SubjectTO {
         this.id = subject.getId();
         this.title = subject.getName();
         this.thumbnail = "";
+        this.url = new ArrayList<>();
         for (DocumentUrl doc : subject.getDocuments()) {
-            this.url.add(doc.getUrl());
+            getUrls().add(doc.getUrl());
         }
+    }
+
+    public SubjectTO(Long id, String title, String thumbnail) {
+        this.id = id;
+        this.title = title;
+        this.thumbnail = thumbnail;
+//        this.url = new ArrayList<>();
+//        this.url.add(url);
+    }
+
+    public List<String> getUrls() {
+        if (url == null) {
+            url = new ArrayList<>();
+        }
+        return url;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
     }
 }

@@ -29,7 +29,7 @@ public class CategoryTO {
     private String title;
     private String icon;
     private String color;
-    private List<Subject> subjects = new ArrayList<>();
+    private List<SubjectTO> subjects;
 
 
     public CategoryTO(Category category) {
@@ -38,7 +38,38 @@ public class CategoryTO {
         this.icon = iconMap.get(category.getId());
         this.color = colorMap.get(category.getId());
         for (Subject subject : category.getSubjects()) {
-            this.subjects.add(subject);
+            SubjectTO subjectTO = new SubjectTO(subject);
+            getSubjects().add(subjectTO);
         }
+    }
+
+    public CategoryTO(Long id, String title){
+        this.id = id;
+        this.title = title;
+        this.icon = iconMap.get(id);
+        this.color = colorMap.get(id);
+    }
+
+    public List<SubjectTO> getSubjects() {
+        if (subjects == null) {
+            subjects = new ArrayList<>();
+        }
+        return subjects;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

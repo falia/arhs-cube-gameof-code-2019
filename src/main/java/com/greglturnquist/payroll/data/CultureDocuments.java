@@ -17,23 +17,23 @@ public class CultureDocuments {
     public List<DocumentUrl> createCinemaDocuments() {
         List<DocumentUrl> documents = new ArrayList<>();
         documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=1908865&custom_att_2=direct")));
-        documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=1908885&custom_att_2=direct")));
+//        documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=1908885&custom_att_2=direct")));
         return documents;
     }
 
     public List<DocumentUrl> createMusicDocuments() {
         List<DocumentUrl> documents = new ArrayList<>();
         documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=3493494&custom_att_2=direct")));
-        documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=3443533&custom_att_2=direct")));
+//        documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=3443533&custom_att_2=direct")));
         return documents;
     }
 
-    public List<DocumentUrl> createEventsDocuments() {
-        List<DocumentUrl> documents = new ArrayList<>();
-        documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=3494174&custom_att_2=direct")));
-        documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=3494225&custom_att_2=direct")));
-        return documents;
-    }
+//    public List<DocumentUrl> createEventsDocuments() {
+//        List<DocumentUrl> documents = new ArrayList<>();
+//        documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=3494174&custom_att_2=direct")));
+//        documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=3494225&custom_att_2=direct")));
+//        return documents;
+//    }
 
     public List<DocumentUrl> createLiteratureDocuments() {
         List<DocumentUrl> documents = new ArrayList<>();
@@ -45,7 +45,7 @@ public class CultureDocuments {
     public List<DocumentUrl> createTelevisionDocuments() {
         List<DocumentUrl> documents = new ArrayList<>();
         documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=1836619&custom_att_2=direct")));
-        documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=1769858&custom_att_2=direct")));
+//        documents.add(documentUrlRepository.save(new DocumentUrl("http://www.eluxemburgensia.lu/webclient/DeliveryManager?pid=1769858&custom_att_2=direct")));
         return documents;
     }
 

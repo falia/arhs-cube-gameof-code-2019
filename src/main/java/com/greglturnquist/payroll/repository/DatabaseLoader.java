@@ -81,6 +81,7 @@ public class DatabaseLoader implements CommandLineRunner {
         subjects.add(createSubject("Biology").addAllDocument(scienceDocuments.createBiologyDocuments()));
         subjects.add(createSubject("Informatics").addAllDocument(scienceDocuments.createInformaticsDocuments()));
         subjects.add(createSubject("Health").addAllDocument(scienceDocuments.createHealthDocuments()));
+        subjects.add(createSubject("Research").addAllDocument(scienceDocuments.createResearchDocuments()));
         return subjects;
     }
 
@@ -88,10 +89,10 @@ public class DatabaseLoader implements CommandLineRunner {
         ArrayList<Subject> subjects = new ArrayList<>();
         subjects.add(createSubject("Cinema").addAllDocument(cultureDocuments.createCinemaDocuments()));
         subjects.add(createSubject("Music").addAllDocument(cultureDocuments.createMusicDocuments()));
-        subjects.add(createSubject("Spectacle").addAllDocument(cultureDocuments.createEventsDocuments()));
         subjects.add(createSubject("Literature").addAllDocument(cultureDocuments.createLiteratureDocuments()));
         subjects.add(createSubject("Television").addAllDocument(cultureDocuments.createTelevisionDocuments()));
         subjects.add(createSubject("Exposition").addAllDocument(cultureDocuments.createExpositionDocuments()));
+//        subjects.add(createSubject("Spectacle").addAllDocument(cultureDocuments.createEventsDocuments()));
         return subjects;
     }
 
@@ -102,7 +103,7 @@ public class DatabaseLoader implements CommandLineRunner {
         subjects.add(createSubject("Tennis").addAllDocument(sportDocuments.createTennisDocuments()));
         subjects.add(createSubject("Cycling").addAllDocument(sportDocuments.createCyclingDocuments()));
         subjects.add(createSubject("Handball").addAllDocument(sportDocuments.createHandballDocuments()));
-        subjects.add(createSubject("Rally").addAllDocument(sportDocuments.createRallyDocuments()));
+//        subjects.add(createSubject("Rally").addAllDocument(sportDocuments.createRallyDocuments()));
         return subjects;
     }
 
@@ -113,7 +114,7 @@ public class DatabaseLoader implements CommandLineRunner {
         subjects.add(createSubject("Job").addAllDocument(economyDocuments.createJobsDocuments()));
         subjects.add(createSubject("Market").addAllDocument(economyDocuments.createMarketDocuments()));
         subjects.add(createSubject("Real state").addAllDocument(economyDocuments.createRealStateDocuments()));
-        subjects.add(createSubject("Macro economy").addAllDocument(economyDocuments.createMacroEconomyDocuments()));
+//        subjects.add(createSubject("Macro economy").addAllDocument(economyDocuments.createMacroEconomyDocuments()));
         return subjects;
     }
 
