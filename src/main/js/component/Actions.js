@@ -1,11 +1,12 @@
 import React from "react";
 import PopPop from 'react-poppop';
+import Modal from 'react-responsive-modal';
 
 const overlay = {
-    position: 'fixed',
+    position: 'absolute',
     top: 0,
     left: 0,
-    width: '100%',
+    width: '1072px',
     height: '100%',
     zIndex: 50,
     backgroundColor: 'transparent'
@@ -31,18 +32,20 @@ class Actions extends React.Component {
         return (
             <div>
                 <button className="btn btn-default" onClick={() => this.props.handleToggle(true)}>Ask Card</button>
-                <PopPop position="centerCenter"
-                        open={this.props.show}
+                <Modal open={this.props.show}
                         onClose={() => this.props.handleToggle(false)}
-                        overlayStyle={overlay}
-                        contentStyle={content}>
-
+                        center
+                       showCloseIcon={false}
+                       classNames={{
+                           overlay: "popup-overlay",
+                           modal: "popup-modal"
+                       }}>
                     <div>
 
                         {this.props.children}
 
                     </div>
-                </PopPop>
+                </Modal>
             </div>
         )
     }
