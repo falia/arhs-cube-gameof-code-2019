@@ -22,8 +22,13 @@ class Card extends React.Component {
                         <div className="subject-body">
                             <img src={this.props.data.subject.thumbnail} width="100%" height="120"></img>
                         </div>
-                        <div className="subject-footer">
-                            {this.props.data.subject.title}
+                        <div>
+                            <div className="category-icon">
+                                <img onClick={()=> window.open(this.props.data.url, "_blank")} src="/icons/magnifier.png" width="30" height="30"></img>
+                            </div>
+                            <div className="subject-footer">
+                                {this.props.data.subject.title}
+                            </div>
                         </div>
                     </div>
                 </div>
